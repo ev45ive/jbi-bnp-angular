@@ -3,6 +3,15 @@
     <app-playlist-list />
   </div>
   <div>
+
+    <!-- {{text}} [prop] (event) |pipe #ref  *template  -->
+
+    <ng-container ngSwitch="mode">
+      <app-playlist-details ngSwitchCase="details" />
+      <app-playlist-editor ngSwitchCase="editor" />
+    </ng-container>
+    
+
     <!-- Error: NG0201: No provider for _TemplateRef found. 
         Find more at https://angular.dev/errors/NG0201 -->
     <!-- <app-playlist-details [ngIf]="false" /> -->
@@ -10,11 +19,11 @@
     <!-- <ng-template [ngIf]="mode === 'details'" [ngIfThen]="detailsTplRef"  [ngIfElse]="editorTplRef"/> -->
 
     <!-- <ng-template [ngIf] -->
-    <app-playlist-details *ngIf="mode === 'details'" data-pancakes />
+    <!-- <app-playlist-details *ngIf="mode === 'details'" data-pancakes /> -->
 
-    <ng-container *ngIf="mode === 'details'; 
+    <!-- <ng-container *ngIf="mode === 'details'; 
                           then detailsTplRef; 
-                          else editorTplRef" />
+                          else editorTplRef" /> -->
       <!-- 
          d = new NgIf(container)
               d.if = condition
@@ -23,13 +32,10 @@
        -->
 
 
-    <ng-template #detailsTplRef>
-      <app-playlist-details />
-    </ng-template>
+    
 
-    <ng-template #editorTplRef>
-      <app-playlist-editor />
-    </ng-template>
+    
+    
 
     <!-- <app-playlist-details [hidden]="mode !== 'details'" /> -->
     <!-- <app-playlist-editor [hidden]="mode !== 'editor'  " /> -->
@@ -43,3 +49,13 @@
 </div>
 
 <!-- {{}} [] () # -->
+
+
+<!-- <ul>
+  <ng-container *ngIf>  
+    <li>Title:</li>
+    <li>Bananas</li>
+  </ng-container>
+</ul> -->
+
+<!-- container -->
