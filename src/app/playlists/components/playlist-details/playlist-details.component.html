@@ -1,22 +1,25 @@
-
-
 <!-- .grid.gap-5>div.grid.gap-2*3>strong{Name}+div{Playlist Name} -->
 
 <!-- {{ 'any expression '.toUpperCase() + 123 }} -->
+<!-- {{  isTrueOrFalse ? 'show this ' : 'else this'}} -->
 
-<div class="grid gap-5">
-    <div class="grid gap-2">
-        <strong>Name</strong>
-        <div>Playlist Name</div>
-    </div>
+<div class="grid gap-5"
+    id="playlist_{{playlist.id}}"
+    [title]="playlist.name"
+    [attr.data-playlist-id]="playlist.id"
+>
+  <div class="grid gap-2">
+    <strong>Name</strong>
+    <div>{{ playlist.name }}</div>
+  </div>
 
-    <div class="grid gap-2">
-        <strong>Public</strong>
-        <div>Yes</div>
-    </div>
+  <div class="grid gap-2">
+    <strong>Public</strong>
+    <div>{{ playlist.public ? "Yes" : "No" }}</div>
+  </div>
 
-    <div class="grid gap-2">
-        <strong>Description</strong>
-        <div>Best Playlist </div>
-    </div>
+  <div class="grid gap-2">
+    <strong>Description</strong>
+    <div>{{ playlist.description }}</div>
+  </div>
 </div>
