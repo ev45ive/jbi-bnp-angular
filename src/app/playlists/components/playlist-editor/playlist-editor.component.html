@@ -11,7 +11,10 @@
       type="text"
       [value]="playlist.name"
       class="border border-solid border-gray-400"
+      #localInputRef
     />
+    <!-- <div class="text-right">{{playlist.name.length}} / 100</div> -->
+    <div class="text-right">{{localInputRef.value.length}} / 100</div>
   </div>
 
   <div class="grid gap-2">
