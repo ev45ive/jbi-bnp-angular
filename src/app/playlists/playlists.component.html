@@ -3,10 +3,32 @@
     <app-playlist-list />
   </div>
   <div>
-    <app-playlist-details [hidden]="false" />
-    <app-playlist-editor [hidden]="true" />
+    <!-- Error: NG0201: No provider for _TemplateRef found. 
+        Find more at https://angular.dev/errors/NG0201 -->
+    <!-- <app-playlist-details [ngIf]="false" /> -->
 
-    <button class="bg-red-500 p-2 m-2">Cancel</button>
-    <button class="bg-red-500 p-2 m-2">Edit</button>
+    <ng-template
+      [ngIf]="mode === 'details'"
+      [ngIfThen]="detailsTplRef"
+      [ngIfElse]="editorTplRef"
+    />
+    
+    <ng-template #detailsTplRef>
+      <app-playlist-details />
+    </ng-template>
+    
+    <ng-template #editorTplRef>
+      <app-playlist-editor />
+    </ng-template>
+    <!-- <app-playlist-details [hidden]="mode !== 'details'" /> -->
+    <!-- <app-playlist-editor [hidden]="mode !== 'editor'  " /> -->
+
+    {{ mode }}
+    <button class="bg-red-500 p-2 m-2" (click)="mode = 'details'">
+      Cancel
+    </button>
+    <button class="bg-red-500 p-2 m-2" (click)="mode = 'editor'">Edit</button>
   </div>
 </div>
+
+<!-- {{}} [] () # -->
