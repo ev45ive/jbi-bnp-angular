@@ -10,13 +10,14 @@
     <!-- <ng-template [ngIf]="mode === 'details'" [ngIfThen]="detailsTplRef"  [ngIfElse]="editorTplRef"/> -->
 
     <!-- <ng-template [ngIf] -->
-    <app-playlist-details *ngIf="mode === 'details'"  data-pancakes />
+    <app-playlist-details *ngIf="mode === 'details'" data-pancakes />
 
-    
+    <ng-container *ngIf="mode === 'details'; then detailsTplRef; else editorTplRef" />
+
     <ng-template #detailsTplRef>
       <app-playlist-details />
     </ng-template>
-    
+
     <ng-template #editorTplRef>
       <app-playlist-editor />
     </ng-template>
