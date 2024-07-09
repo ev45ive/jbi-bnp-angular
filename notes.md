@@ -73,6 +73,9 @@ npx tailwindcss init
 
  "./src/**/*.{html,ts}",
 
+ alternatively (huge size!):
+  <script src="https://cdn.tailwindcss.com"></script>
+
  
 # Playlists module 
 ng g m --help
