@@ -62,3 +62,9 @@ UPDATE src/app/app.module.ts (586 bytes)
 UPDATE angular.json (3348 bytes)
 UPDATE src/index.html (648 bytes)
 UPDATE src/styles.scss (182 bytes)
+
+# Tailwind
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+ "./src/**/*.{html,ts}",
