@@ -40,3 +40,25 @@ npx @angular/cli new jbibnp --directory '.' --routing --ssr true --standalone fa
 
 https://angular.dev/tools/devtools
 https://chromewebstore.google.com/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
+
+
+# Angular material
+ng add @angular/material
+
+Using package manager: npm
+✔ Found compatible package version: @angular/material@18.0.6.
+✔ Package information loaded.
+
+The package @angular/material@18.0.6 will be installed and executed.
+Would you like to proceed? Yes
+✔ Packages successfully installed.
+? Choose a prebuilt theme name, or "custom" for a custom theme: Rose/Red           [Preview:       
+https://material.angular.io?theme=rose-red]
+? Set up global Angular Material typography styles? Yes
+? Include the Angular animations module? Include and enable animations
+UPDATE package.json (1330 bytes)
+✔ Packages installed successfully.
+UPDATE src/app/app.module.ts (586 bytes)
+UPDATE angular.json (3348 bytes)
+UPDATE src/index.html (648 bytes)
+UPDATE src/styles.scss (182 bytes)
