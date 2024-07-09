@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
   selector: 'app-playlist-editor',
   templateUrl: './playlist-editor.component.html',
   styleUrl: './playlist-editor.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush, // d|-_-|b  
+  // changeDetection: ChangeDetectionStrategy.OnPush, // d|-_-|b  
 })
 export class PlaylistEditorComponent {
   
@@ -17,10 +17,10 @@ export class PlaylistEditorComponent {
 
   constructor(private cdr: ChangeDetectorRef){}
 
-  ngDoCheck(): void {
-    console.log('parent is checked!');
-    this.cdr.markForCheck() // Update us with parent THIS ONE TIME!
-  }
+  // ngDoCheck(): void {
+  //   console.log('parent is checked!');
+  //   this.cdr.markForCheck() // Update us with parent THIS ONE TIME!
+  // }
 
   // location = globalThis.location
 }
