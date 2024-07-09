@@ -30,8 +30,21 @@
     color : playlist.public ? 'red' : 'green' 
   }"></div>
 
+  <!-- S.O.L.D -->
+  <!-- 
+    d = new NgStyle(ElementRef<div> , renderer) 
+    d.ngStyle = { ... }
+    d.ngDoCheck()
+    -->
+
   <div [ngClass]="{
     isPublic: playlist.public,
     isPrivate: !playlist.public,
   }"></div>
+
+  <!-- 
+    d = new NgClass(ElementRef<div> , renderer) 
+    d.ngClass = {...}
+    d.ngDoCheck()
+   -->
 </div>
