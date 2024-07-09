@@ -7,11 +7,11 @@
         Find more at https://angular.dev/errors/NG0201 -->
     <!-- <app-playlist-details [ngIf]="false" /> -->
 
-    <ng-template
-      [ngIf]="mode === 'details'"
-      [ngIfThen]="detailsTplRef"
-      [ngIfElse]="editorTplRef"
-    />
+    <!-- <ng-template [ngIf]="mode === 'details'" [ngIfThen]="detailsTplRef"  [ngIfElse]="editorTplRef"/> -->
+
+    <!-- <ng-template [ngIf] -->
+    <app-playlist-details *ngIf="mode === 'details'"  data-pancakes />
+
     
     <ng-template #detailsTplRef>
       <app-playlist-details />
@@ -20,6 +20,7 @@
     <ng-template #editorTplRef>
       <app-playlist-editor />
     </ng-template>
+
     <!-- <app-playlist-details [hidden]="mode !== 'details'" /> -->
     <!-- <app-playlist-editor [hidden]="mode !== 'editor'  " /> -->
 
