@@ -1,4 +1,23 @@
-<p>playlists works!</p>
+
+<!-- Emmet - google for cheatsheet! -->
+
+<!-- .grid>.grid-cols-2>div*2  -> Ctrl+Space then enter -->
+
+<!-- < type and enter -->
 
 
-<router-outlet/>
+<div class="grid">
+    <div class="grid-cols-2">
+        <div>
+            <app-playlist-list/>
+        </div>
+        <div>
+            <app-playlist-details/>
+            <app-playlist-editor/>
+        </div>
+    </div>
+</div>
+
+<!-- Emmet Builtin -->
+<!-- div#someid.pancakes>ul.list>li.item*3>{$ item}+button.text-red-500{select}^^div{banana} -->
+ 
