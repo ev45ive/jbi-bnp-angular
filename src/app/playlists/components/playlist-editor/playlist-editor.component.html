@@ -2,7 +2,7 @@
 <!-- div.grid.gap-5>div.grid.gap-2>label{Name}+input -->
 
 <!-- <pre>{{playlist | json  | uppercase }}</pre> -->
-<pre>{{ playlist | json  }}</pre>
+<pre>{{ playlist | json }}</pre>
 
 <div class="grid gap-5">
   <div class="grid gap-2">
@@ -12,21 +12,21 @@
       class="border border-solid border-gray-400"
       #localInputRef
       [(ngModel)]="playlist.name"
-      />
-      <!-- [ngModel]="playlist.name" (ngModelChange)="playlist.name = $event " -->
-      <!-- [value]="playlist.name" (input)=" playlist.name = $any( $event.target ).value " -->
-    <div class="text-right">{{playlist.name.length}} / 100</div>
-    <!-- <div class="text-right">{{localInputRef.value.length}} / 100</div> -->
+    />
+    <div class="text-right">{{ playlist.name.length }} / 100</div>
   </div>
 
   <div class="grid gap-2">
-    <label> <input type="checkbox" [ngModel]="playlist.public" (click)="0"/> Public</label>
+    <label>
+      <input type="checkbox" [(ngModel)]="playlist.public" (click)="(0)" />
+      Public</label
+    >
   </div>
 
   <div class="grid gap-2">
     <label>Description</label>
     <textarea
-      [ngModel]="playlist.description"
+      [(ngModel)]="playlist.description"
       class="border border-solid border-gray-400"
     ></textarea>
   </div>

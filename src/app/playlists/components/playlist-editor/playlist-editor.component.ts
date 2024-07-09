@@ -15,7 +15,7 @@ export class PlaylistEditorComponent {
     description: 'Cool playlsit',
   };
 
-  constructor(private cdr: ChangeDetectorRef){}
+  // constructor(private cdr: ChangeDetectorRef){}
 
   // ngDoCheck(): void {
   //   console.log('parent is checked!');
