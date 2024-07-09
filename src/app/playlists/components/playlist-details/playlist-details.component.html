@@ -16,11 +16,22 @@
   <div class="grid gap-2">
     <strong>Public</strong>
     <!-- $0.style.color = 'red'  -->
-    <div [style.color]=" 'dark' + 'red'  ">{{ playlist.public ? "Yes" : "No" }}</div>
+    <div [style.color]=" playlist.public ? 'red' : 'green' ">
+        {{ playlist.public ? "Yes" : "No" }}
+    </div>
   </div>
 
   <div class="grid gap-2">
     <strong>Description</strong>
     <div [class.text-gray-500]="true">{{ playlist.description }}</div>
   </div>
+
+  <div [ngStyle]="{
+    color : playlist.public ? 'red' : 'green' 
+  }"></div>
+
+  <div [ngClass]="{
+    isPublic: playlist.public,
+    isPrivate: !playlist.public,
+  }"></div>
 </div>
