@@ -1,5 +1,9 @@
 https://stackblitz.com/edit/stackblitz-starters-hzhdtx
 
+https://api.spotify.com/v1 -> 401 is fine!
+
+https://stackblitz.com/github/ev45ive/jbi-bnp-angular
+
 # Installations
 
 node -v
