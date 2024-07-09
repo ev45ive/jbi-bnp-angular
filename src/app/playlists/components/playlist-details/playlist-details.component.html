@@ -15,11 +15,12 @@
 
   <div class="grid gap-2">
     <strong>Public</strong>
-    <div>{{ playlist.public ? "Yes" : "No" }}</div>
+    <!-- $0.style.color = 'red'  -->
+    <div [style.color]=" 'dark' + 'red'  ">{{ playlist.public ? "Yes" : "No" }}</div>
   </div>
 
   <div class="grid gap-2">
     <strong>Description</strong>
-    <div>{{ playlist.description }}</div>
+    <div [class.text-gray-500]="true">{{ playlist.description }}</div>
   </div>
 </div>
