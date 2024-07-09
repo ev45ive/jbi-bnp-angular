@@ -3,9 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/playlists',
+    pathMatch: 'full',
+  },
+  {
     path: 'playlists',
     loadChildren: () =>
-      import('./playlists/playlists.module').then((m) => m.PlaylistsModule),
+      import('./playlists/playlists.module')
+    .then((m) => m.PlaylistsModule),
+  },
+  {
+    path: '**',
+    redirectTo: '/playlists',
+    pathMatch: 'full',
+    // component: PageNotFound
   },
 ];
 

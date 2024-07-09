@@ -7,6 +7,7 @@ import { PlaylistsViewComponent } from './containers/playlists-view/playlists-vi
 import { PlaylistListComponent } from './components/playlist-list/playlist-list.component';
 import { PlaylistDetailsComponent } from './components/playlist-details/playlist-details.component';
 import { PlaylistEditorComponent } from './components/playlist-editor/playlist-editor.component';
+import { PlaylistsTracksViewComponent } from './containers/playlists-tracks-view/playlists-tracks-view.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PlaylistEditorComponent } from './components/playlist-editor/playlist-e
     PlaylistsViewComponent,
     PlaylistListComponent,
     PlaylistDetailsComponent,
-    PlaylistEditorComponent
+    PlaylistEditorComponent,
+    PlaylistsTracksViewComponent
   ],
   imports: [
     CommonModule,
