@@ -12,7 +12,16 @@
     <!-- <ng-template [ngIf] -->
     <app-playlist-details *ngIf="mode === 'details'" data-pancakes />
 
-    <ng-container *ngIf="mode === 'details'; then detailsTplRef; else editorTplRef" />
+    <ng-container *ngIf="mode === 'details'; 
+                          then detailsTplRef; 
+                          else editorTplRef" />
+      <!-- 
+         d = new NgIf(container)
+              d.if = condition
+              d.then = templateRef
+              d.else = templateRef
+       -->
+
 
     <ng-template #detailsTplRef>
       <app-playlist-details />
