@@ -6,9 +6,9 @@
 
     <!-- {{text}} [prop] (event) |pipe #ref  *template  -->
 
-    <ng-container ngSwitch="mode">
-      <app-playlist-details ngSwitchCase="details" />
-      <app-playlist-editor ngSwitchCase="editor" />
+    <ng-container [ngSwitch]="mode">
+      <app-playlist-details *ngSwitchDefault />
+      <app-playlist-editor *ngSwitchCase="'editor'" />
     </ng-container>
     
 
