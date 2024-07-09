@@ -14,4 +14,5 @@ export class PlaylistEditorComponent {
     description: 'Cool playlsit',
   };
 
+  // location = globalThis.location
 }
