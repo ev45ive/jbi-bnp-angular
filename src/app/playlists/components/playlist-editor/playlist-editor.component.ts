@@ -23,26 +23,26 @@ export class PlaylistEditorComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() save = new EventEmitter<Playlist>();
 
-  draft!: Playlist;
+  // draft!: Playlist;
 
-  constructor() {
-    console.log('constructor');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes); // Only if new Reference! Not value!
-  }
-  ngOnInit(): void {
-    console.log('ngOnInit');
-  }
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
-  }
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-  }
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy');
-  }
+  // constructor() {
+  //   console.log('constructor');
+  // }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('ngOnChanges', changes); // Only if new Reference! Not value!
+  // }
+  // ngOnInit(): void {
+  //   console.log('ngOnInit');
+  // }
+  // ngDoCheck(): void {
+  //   console.log('ngDoCheck');
+  // }
+  // ngAfterViewInit(): void {
+  //   console.log('ngAfterViewInit');
+  // }
+  // ngOnDestroy(): void {
+  //   console.log('ngOnDestroy');
+  // }
 
   submit() {
     this.cancel.emit();

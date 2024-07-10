@@ -10,10 +10,12 @@
     <input
       type="text"
       class="border border-solid border-gray-400"
+      [ngModel]="playlist.name"
+
       #localInputRef
-      [(ngModel)]="playlist.name"
+      #localModelRef="ngModel"
     />
-    <div class="text-right">{{ playlist.name.length }} / 100</div>
+    <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
   </div>
 
   <div class="grid gap-2">
