@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { mockAlbums } from '../model/mockAlbums';
 import { environment } from '../../../environments/environment';
+import { API_URL } from '../../tokens';
 
 @Injectable({
-  providedIn: 'root' // Singleton lazy
+  providedIn: 'root', // Singleton lazy
 })
 export class MusicApiService {
-
   // api_url = 'https://api.spotify.com/v1/search'
-  api_url = environment.apiConfig.url
-  
-  constructor() { }
+  // api_url = environment.apiConfig.url
 
-  searchAlbums(query = 'batman'){
-    return mockAlbums
+  api_url = inject(API_URL).url;
+
+  constructor() {}
+
+  searchAlbums(query = 'batman') {
+    console.log('Search',this.api_url,query);
+    
+    return mockAlbums;
   }
 }
 
