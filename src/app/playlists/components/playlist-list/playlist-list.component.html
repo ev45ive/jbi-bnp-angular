@@ -2,12 +2,17 @@
 <!-- <ng-template ngFor [ngForOf]="playlists" let-item="$implicit"> -->
 
 <mat-nav-list>
-  <mat-list-item *ngFor="let item of playlists; index as i" [activated]="true">
+  <mat-list-item
+    *ngFor="let item of playlists; index as i"
+    [activated]="item.id == selectedId"
+    class="select-none"
+    (click)="select(item.id)"
+  >
     <div>{{ i + 1 }}. {{ item.name }}</div>
   </mat-list-item>
 </mat-nav-list>
 
-{{selectedId}}
+{{ selectedId }}
 
 <!-- <ng-template ngFor [ngForOf]="playlists" let-item let-i="index">
     <mat-list-item>

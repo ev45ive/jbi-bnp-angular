@@ -29,7 +29,9 @@ const mockPlaylists = [
 })
 export class PlaylistListComponent {
   playlists = mockPlaylists;
+  
   selectedId = '234';
+
   select(id: string) {
     this.selectedId = id;
   }
