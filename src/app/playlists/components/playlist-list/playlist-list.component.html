@@ -3,9 +3,9 @@
 
 <mat-nav-list>
   <mat-list-item
+    class="select-none"
     *ngFor="let item of playlists; index as i"
     [activated]="item.id == selectedId"
-    class="select-none"
     (click)="select(item.id)"
   >
     <div>{{ i + 1 }}. {{ item.name }}</div>

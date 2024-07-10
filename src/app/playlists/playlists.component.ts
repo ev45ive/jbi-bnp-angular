@@ -8,6 +8,14 @@ type Modes = 'details' | 'editor';
   styleUrl: './playlists.component.scss',
 })
 export class PlaylistsComponent {
+  
+  playlists = mockPlaylists;
+  selectedId = '234';
+  selected = mockPlaylists[1];
+  selectPlaylistById(id: string) {
+    this.selected = this.playlists.find((p) => p.id == id)!;
+  }
+
   mode: Modes = 'details';
 
   showDetails() {
