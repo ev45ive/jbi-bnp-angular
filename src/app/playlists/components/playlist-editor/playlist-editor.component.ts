@@ -20,25 +20,4 @@ export class PlaylistEditorComponent {
     public: true,
     description: 'Cool playlsit',
   };
-
-  // constructor(private elem: ElementRef) {}
-
-  // Injecting parents - warning: High Coupling
-  constructor(private parent: PlaylistsComponent, private app: AppComponent) {
-    console.log(parent, app);
-    debugger;
-  }
-
-  onCancel(){
-    this.parent.mode = 'details'
-  }
-
-  // constructor(private cdr: ChangeDetectorRef){}
-
-  // ngDoCheck(): void {
-  //   console.log('parent is checked!');
-  //   this.cdr.markForCheck() // Update us with parent THIS ONE TIME!
-  // }
-
-  // location = globalThis.location
 }

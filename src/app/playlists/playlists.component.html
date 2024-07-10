@@ -1,61 +1,20 @@
+
 <div class="grid grid-cols-2 gap-5">
+
   <div>
     <app-playlist-list />
   </div>
   <div>
 
-    <!-- {{text}} [prop] (event) |pipe #ref  *template  -->
-
     <ng-container [ngSwitch]="mode">
       <app-playlist-details *ngSwitchDefault />
       <app-playlist-editor *ngSwitchCase="'editor'" />
     </ng-container>
-    
 
-    <!-- Error: NG0201: No provider for _TemplateRef found. 
-        Find more at https://angular.dev/errors/NG0201 -->
-    <!-- <app-playlist-details [ngIf]="false" /> -->
-
-    <!-- <ng-template [ngIf]="mode === 'details'" [ngIfThen]="detailsTplRef"  [ngIfElse]="editorTplRef"/> -->
-
-    <!-- <ng-template [ngIf] -->
-    <!-- <app-playlist-details *ngIf="mode === 'details'" data-pancakes /> -->
-
-    <!-- <ng-container *ngIf="mode === 'details'; 
-                          then detailsTplRef; 
-                          else editorTplRef" /> -->
-      <!-- 
-         d = new NgIf(container)
-              d.if = condition
-              d.then = templateRef
-              d.else = templateRef
-       -->
-
-
-    
-
-    
-    
-
-    <!-- <app-playlist-details [hidden]="mode !== 'details'" /> -->
-    <!-- <app-playlist-editor [hidden]="mode !== 'editor'  " /> -->
-
-    {{ mode }}
-    <button class="bg-red-500 p-2 m-2" (click)="mode = 'details'">
+    <button mat-raised-button (click)="mode = 'details'">
       Cancel
     </button>
-    <button class="bg-red-500 p-2 m-2" (click)="mode = 'editor'">Edit</button>
+    <button mat-raised-button (click)="mode = 'editor'">Edit</button>
   </div>
 </div>
-
-<!-- {{}} [] () # -->
-
-
-<!-- <ul>
-  <ng-container *ngIf>  
-    <li>Title:</li>
-    <li>Bananas</li>
-  </ng-container>
-</ul> -->
-
-<!-- container -->
+ 
