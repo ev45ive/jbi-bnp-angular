@@ -3,6 +3,7 @@ import { mockAlbums } from '../model/mockAlbums';
 import { environment } from '../../../environments/environment';
 import { API_URL } from '../../tokens';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', // Singleton lazy
@@ -16,7 +17,8 @@ export class MusicApiService {
   searchAlbums(query = 'batman') {
     console.log('Search', this.api_url, query);
 
-    this.http.get(this.api_url + 'search', {
+    // Uni-Cast  Observable - aka. Recipe
+    const obs: Observable<any> = this.http.get(this.api_url + 'search', {
       headers: {
         Authorization: `Bearer ilikepancakesmuch`,
       },
@@ -24,6 +26,19 @@ export class MusicApiService {
         type: 'album',
         q: query,
       },
+      // reportProgress: true,
+    });
+
+    // Cooking
+    const subscription: Subscription = obs.subscribe(console.log);
+    subscription.unsubscribe(); // Cancel requests
+
+    // obs.subscribe() // beacon 
+
+    const sub2 = obs.subscribe({
+      next: (res) => console.log(res),
+      error: (error) => console.log(error.error.error.message),
+      complete: () => console.log('complete'),
     });
 
     return mockAlbums;
