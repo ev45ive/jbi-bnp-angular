@@ -105,3 +105,4 @@ ng g c music/components/search-form
 ng g c music/components/results-grid
 ng g c music/components/album-card 
 
+ng g s core/services/music-api
