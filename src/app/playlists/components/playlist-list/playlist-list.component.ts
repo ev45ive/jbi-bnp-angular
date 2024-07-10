@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
-import { Playlist } from './Playlist';
+import { Playlist } from '../../../core/model/Playlist';
 
 NgFor;
 @Component({
@@ -15,9 +15,5 @@ export class PlaylistListComponent {
 
   select(id: string) {
     this.selectedId = id;
-  }
-
-  // constructor(parent: PlaylistsComponent) {
-  //   parent.selectPlaylistById(this.selectedId);
-  // }
+  } 
 }

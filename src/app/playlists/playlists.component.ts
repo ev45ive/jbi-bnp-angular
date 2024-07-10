@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { mockPlaylists } from '../core/model/mockPlaylists';
 
 type Modes = 'details' | 'editor';
 

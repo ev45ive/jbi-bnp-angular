@@ -1,4 +1,4 @@
-import { Playlist } from './Playlist';
+import { Playlist } from "./Playlist";
 
 export const mockPlaylists: Playlist[] = [
   {
