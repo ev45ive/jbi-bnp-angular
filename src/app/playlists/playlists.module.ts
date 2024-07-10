@@ -21,8 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     PlaylistsTracksViewComponent,
   ],
   imports: [
+    SharedModule,
     PlaylistsRoutingModule, 
-    SharedModule
   ],
 })
 export class PlaylistsModule {}
