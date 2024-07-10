@@ -2,6 +2,7 @@
   <div>
     <app-playlist-list
       [items]="playlistsData"
+      [selectedId]="selectedId"
       (selectedIdChange)="selectPlaylistById($event)"
     />
     <!-- <input type="text" [value]="selected.name"  [pancakes]="'bananas'"> -->

@@ -11,10 +11,9 @@ import { Playlist } from '../../../core/model/Playlist';
 export class PlaylistListComponent {
   @Input('items') playlists: Playlist[] = [];
 
-  // ngin
   @Output() selectedIdChange = new EventEmitter<Playlist['id']>();
 
-  selectedId = '';
+  @Input() selectedId = '';
 
   select(id: string) {
     // this.selectedId = id;
