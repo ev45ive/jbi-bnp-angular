@@ -27,7 +27,7 @@ export class PlaylistsComponent {
   showEditor() {
     this.mode = 'editor';
   }
-  
+
   savePlaylist(draft: Playlist) {
     console.log('Fake saving... ', draft);
   }

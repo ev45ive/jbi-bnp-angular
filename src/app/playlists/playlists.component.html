@@ -8,9 +8,17 @@
   </div>
   <div>
     <ng-container [ngSwitch]="mode">
-      <app-playlist-details *ngSwitchDefault [playlist]="selected" />
-      <app-playlist-editor *ngSwitchCase="'editor'" [playlist]="selected" />
+      <app-playlist-details
+        *ngSwitchDefault
+        [playlist]="selected"
+        (edit)="showEditor()"
+      />
+      <app-playlist-editor
+        *ngSwitchCase="'editor'"
+        [playlist]="selected"
+        (cancel)="showDetails()"
+        (save)="savePlaylist($event)"
+      />
     </ng-container>
-
   </div>
 </div>
