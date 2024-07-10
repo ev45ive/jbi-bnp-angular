@@ -1,5 +1,7 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
+NgFor
 @Component({
   selector: 'app-playlist-list',
   templateUrl: './playlist-list.component.html',

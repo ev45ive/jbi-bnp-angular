@@ -3,15 +3,16 @@
 <!-- mat-nav-list>mat-list-item*3>div{$. Playlist $$} -->
 
 <mat-nav-list>
-    <mat-list-item>
-        <div>1. Playlist 01</div>
-    </mat-list-item>
+
+    <!-- <ng-template ngFor [ngForOf]="playlists" let-item="$implicit"> -->
+    <ng-template ngFor [ngForOf]="playlists" let-item let-i="index">
+        <mat-list-item>
+            <div>{{i+1}}. {{item.name}}</div>
+        </mat-list-item>
+    </ng-template>
+    <!-- <div>{{i+1}}. {{item.name}}</div>  Error! -->
     
-    <mat-list-item>
-        <div>2. Playlist 02</div>
-    </mat-list-item>
-    
-    <mat-list-item>
-        <div>3. Playlist 03</div>
-    </mat-list-item>
+     
 </mat-nav-list>
+
+<!-- [ngFor][ngForOf] -->
