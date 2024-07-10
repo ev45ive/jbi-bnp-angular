@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
 import { Playlist } from '../../../core/model/Playlist';
 
@@ -7,6 +7,7 @@ import { Playlist } from '../../../core/model/Playlist';
   selector: 'app-playlist-list',
   templateUrl: './playlist-list.component.html',
   styleUrl: './playlist-list.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistListComponent {
   @Input('items') playlists: Playlist[] = [];
