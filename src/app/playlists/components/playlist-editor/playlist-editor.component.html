@@ -11,7 +11,20 @@
         [ngModel]="playlist.name" name="name"
         #localInputRef
         #localModelRef="ngModel"
+        required
+        minlength="3"
       />
+      <pre>{{localModelRef.errors | json }}</pre>
+
+      @if(localModelRef.hasError('required')){ Name is required }
+      @if(localModelRef.getError('minlength')){
+        Mininum length is "{{localModelRef.getError('minlength').requiredLength }}"
+      }
+      
+      <div *ngIf="localModelRef.getError('minlength')">
+        Mininum length is "{{localModelRef.getError('minlength').requiredLength }}"
+      </div>
+
       <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
     </div>
 
