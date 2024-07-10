@@ -7,10 +7,12 @@ import {
   Input,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
 import { AppComponent } from '../../../app.component';
 import { Playlist } from '../../../core/model/Playlist';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -23,32 +25,23 @@ export class PlaylistEditorComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() save = new EventEmitter<Playlist>();
 
-  // draft!: Playlist;
+  @ViewChild('localModelRef', { read: NgModel })
+  localModelRef?: NgModel;
 
-  // constructor() {
-  //   console.log('constructor');
-  // }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log('ngOnChanges', changes); // Only if new Reference! Not value!
-  // }
-  // ngOnInit(): void {
-  //   console.log('ngOnInit');
-  // }
-  // ngDoCheck(): void {
-  //   console.log('ngDoCheck');
-  // }
-  // ngAfterViewInit(): void {
-  //   console.log('ngAfterViewInit');
-  // }
-  // ngOnDestroy(): void {
-  //   console.log('ngOnDestroy');
-  // }
+  @ViewChild('formRef', { read: NgForm })
+  formRef?: NgForm;
+
+  ngAfterViewInit(): void {}
 
   submit() {
-    this.cancel.emit();
+    const draft = {
+      ...this.playlist,
+      ...this.formRef?.value,
+    };
+    this.save.emit(draft);
   }
 
   clickCancel() {
-    this.save.emit(this.playlist);
+    this.cancel.emit();
   }
 }

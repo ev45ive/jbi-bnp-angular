@@ -1,40 +1,38 @@
-<!-- div.grid.gap-5>div.grid.gap-2*3>label{Name}+input -->
-<!-- div.grid.gap-5>div.grid.gap-2>label{Name}+input -->
+<form #formRef="ngForm" (ngSubmit)="submit()">
+  <pre>{{ playlist | json }}</pre>
+  <pre>{{ formRef.value | json }}</pre>
 
-<!-- <pre>{{playlist | json  | uppercase }}</pre> -->
-<pre>{{ playlist | json }}</pre>
+  <div class="grid gap-5">
+    <div class="grid gap-2">
+      <label>Name</label>
+      <input
+        type="text"
+        class="border border-solid border-gray-400"
+        [ngModel]="playlist.name" name="name"
+        #localInputRef
+        #localModelRef="ngModel"
+      />
+      <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
+    </div>
 
-<div class="grid gap-5">
-  <div class="grid gap-2">
-    <label>Name</label>
-    <input
-      type="text"
-      class="border border-solid border-gray-400"
-      [ngModel]="playlist.name"
+    <div class="grid gap-2">
+      <label>
+        <input type="checkbox" [(ngModel)]="playlist.public" name="public" (click)="(0)" />
+        Public</label
+      >
+    </div>
 
-      #localInputRef
-      #localModelRef="ngModel"
-    />
-    <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
+    <div class="grid gap-2">
+      <label>Description</label>
+      <textarea
+        [(ngModel)]="playlist.description" name="description"
+        class="border border-solid border-gray-400"
+      ></textarea>
+    </div>
   </div>
 
-  <div class="grid gap-2">
-    <label>
-      <input type="checkbox" [(ngModel)]="playlist.public" (click)="(0)" />
-      Public</label
-    >
+  <div class="flex justify-between w-full mt-5">
+    <button mat-flat-button type="submit">Save</button>
+    <button mat-raised-button type="button" (click)="clickCancel()">Cancel</button>
   </div>
-
-  <div class="grid gap-2">
-    <label>Description</label>
-    <textarea
-      [(ngModel)]="playlist.description"
-      class="border border-solid border-gray-400"
-    ></textarea>
-  </div>
-</div>
-
-<div class="flex justify-between w-full">
-  <button mat-flat-button (click)="clickCancel()">Save</button>
-  <button mat-raised-button (click)="submit()">Cancel</button>
-</div>
+</form>
