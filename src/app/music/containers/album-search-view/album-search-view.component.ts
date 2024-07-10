@@ -2,6 +2,7 @@ import { Component, Inject, inject } from '@angular/core';
 import { AlbumCardComponent } from '../../components/album-card/album-card.component';
 import { SearchFormComponent } from '../../components/search-form/search-form.component';
 import { MusicApiService } from '../../../core/services/music-api.service';
+import { Album } from '../../../core/model/Album';
 
 @Component({
   selector: 'app-album-search-view',
@@ -11,11 +12,11 @@ import { MusicApiService } from '../../../core/services/music-api.service';
   styleUrl: './album-search-view.component.scss',
 })
 export class AlbumSearchViewComponent {
+  api = inject(MusicApiService);
 
-  api = inject(MusicApiService)
+  results: Album[] = [];
 
-  // constructor(
-  //   // @Optional() @Inject(MusicApiToken) private api: IMusicApi
-  //   private api: MusicApiService,
-  // ) {}
+  searchAlbums(query = '') {
+    this.results = this.api.searchAlbums(query);
+  }
 }
