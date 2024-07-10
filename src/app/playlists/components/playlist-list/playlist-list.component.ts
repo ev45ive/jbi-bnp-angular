@@ -16,7 +16,6 @@ export class PlaylistListComponent {
   @Input() selectedId = '';
 
   select(id: string) {
-    // this.selectedId = id;
     this.selectedIdChange.emit(id);
   }
 }

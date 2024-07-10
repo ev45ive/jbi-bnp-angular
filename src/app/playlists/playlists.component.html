@@ -5,8 +5,11 @@
       [selectedId]="selectedId"
       (selectedIdChange)="selectPlaylistById($event)"
     />
-    <!-- <input type="text" [value]="selected.name"  [pancakes]="'bananas'"> -->
-    <!-- <input type="text" [value]="selected.name" (keydown)="$event" /> -->
+    <app-playlist-list
+      [items]="playlistsData"
+      [selectedId]="selectedId"
+      (selectedIdChange)="selectPlaylistById($event)"
+    />
   </div>
   <div>
     {{ selected.name }}
