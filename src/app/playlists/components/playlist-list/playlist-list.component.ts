@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
 import { Playlist } from '../../../core/model/Playlist';
 
@@ -11,9 +11,13 @@ import { Playlist } from '../../../core/model/Playlist';
 export class PlaylistListComponent {
   @Input('items') playlists: Playlist[] = [];
 
+  // ngin
+  @Output() selectedIdChange = new EventEmitter<Playlist['id']>();
+
   selectedId = '';
 
   select(id: string) {
-    this.selectedId = id;
+    // this.selectedId = id;
+    this.selectedIdChange.emit(id);
   }
 }

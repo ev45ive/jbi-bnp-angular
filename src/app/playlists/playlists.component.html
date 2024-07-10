@@ -1,9 +1,16 @@
 <div class="grid grid-cols-2 gap-5">
   <div>
-    <app-playlist-list [items]="playlistsData" />
+    <app-playlist-list
+      [items]="playlistsData"
+      (selectedIdChange)="selectPlaylistById($event)"
+    />
     <!-- <input type="text" [value]="selected.name"  [pancakes]="'bananas'"> -->
+    <!-- <input type="text" [value]="selected.name" (keydown)="$event" /> -->
   </div>
   <div>
+
+    {{selected.name}}
+    
     <ng-container [ngSwitch]="mode">
       <app-playlist-details *ngSwitchDefault />
       <app-playlist-editor *ngSwitchCase="'editor'" />
