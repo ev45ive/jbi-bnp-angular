@@ -1,20 +1,16 @@
-
 <div class="grid grid-cols-2 gap-5">
-
   <div>
     <app-playlist-list />
   </div>
   <div>
-
     <ng-container [ngSwitch]="mode">
       <app-playlist-details *ngSwitchDefault />
       <app-playlist-editor *ngSwitchCase="'editor'" />
     </ng-container>
 
-    <button mat-raised-button (click)="mode = 'details'">
-      Cancel
-    </button>
-    <button mat-raised-button (click)="mode = 'editor'">Edit</button>
+    <div class="flex justify-between w-full">
+      <button mat-raised-button (click)="mode = 'details'">Cancel</button>
+      <button mat-flat-button (click)="mode = 'editor'">Edit</button>
+    </div>
   </div>
 </div>
- 
