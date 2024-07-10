@@ -20,9 +20,10 @@ const routes: Routes = [
     ],
   },
 ];
+export default routes
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class MusicRoutingModule {}
+// @NgModule({
+//   imports: [RouterModule.forChild(routes)],
+//   exports: [RouterModule],
+// })
+// export class MusicRoutingModule {}
