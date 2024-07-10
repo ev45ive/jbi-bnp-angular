@@ -17,7 +17,7 @@ import { CensorDirective } from './directives/censor.directive';
 
 // ng g shared -m playlists
 
-const SHARED_IMPORTS = [
+export const SHARED_IMPORTS = [
   CommonModule,
   FormsModule,
   MatButtonModule,
