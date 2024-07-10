@@ -17,10 +17,12 @@
       />
       <pre>{{ localModelRef.errors | json }}</pre>
 
-      @if(localModelRef.hasError('required')){ Name is required }
-      @if(localModelRef.getError('minlength'); as error){ Mininum length is "{{
-        error.requiredLength
-      }}" }
+      @if (localModelRef.hasError("required")) {
+        Name is required
+      }
+      @if (localModelRef.getError("minlength"); as error) {
+        Mininum length is "{{ error.requiredLength }}"
+      }
 
       <!-- <div *ngIf="localModelRef.getError('minlength') let error = $implicit"> -->
       <!-- <div *ngIf="localModelRef.getError('minlength')   $implicit as error "> -->
