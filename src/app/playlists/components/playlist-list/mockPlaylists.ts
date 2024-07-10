@@ -1,4 +1,6 @@
-const mockPlaylists = [
+import { Playlist } from './Playlist';
+
+export const mockPlaylists: Playlist[] = [
   {
     id: '123',
     name: 'Playlist 123',
@@ -18,3 +20,5 @@ const mockPlaylists = [
     description: 'Best playlsit',
   },
 ];
+
+// export type Playlist = typeof mockPlaylists[number]

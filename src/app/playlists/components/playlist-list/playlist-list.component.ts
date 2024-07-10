@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
+import { Playlist } from './Playlist';
 
 NgFor;
 @Component({
@@ -9,7 +10,7 @@ NgFor;
   styleUrl: './playlist-list.component.scss',
 })
 export class PlaylistListComponent {
-  playlists = [];
+  playlists: Playlist[] = [];
   selectedId = '';
 
   select(id: string) {
