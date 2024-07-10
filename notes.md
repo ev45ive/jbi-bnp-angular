@@ -87,3 +87,8 @@ ng g c playlists/containers/playlists-view
 ng g c playlists/components/playlist-list
 ng g c playlists/components/playlist-details
 ng g c playlists/components/playlist-editor
+
+# SHared
+
+ng g m shared -m playlists 
+ng g d shared/directives/censor --export 

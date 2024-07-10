@@ -14,7 +14,9 @@
         #localModelRef="ngModel"
         required
         minlength="3"
+        appCensor="watman"
       />
+
       <pre>{{ localModelRef.errors | json }}</pre>
 
       @if (localModelRef.hasError("required")) {
@@ -23,13 +25,9 @@
       @if (localModelRef.getError("minlength"); as error) {
         Mininum length is "{{ error.requiredLength }}"
       }
-
-      <!-- <div *ngIf="localModelRef.getError('minlength') let error = $implicit"> -->
-      <!-- <div *ngIf="localModelRef.getError('minlength')   $implicit as error "> -->
-
-      <div *ngIf="localModelRef.getError('minlength') as error">
-        Mininum length is "{{ error.requiredLength }}"
-      </div>
+      @if (localModelRef.getError("censor"); as error) {
+        Cant contain "{{ error.badword }}"
+      }
 
       <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
     </div>

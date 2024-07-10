@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CensorDirective } from './directives/censor.directive';
 
 // ng g shared -m playlists
 
@@ -34,8 +35,8 @@ const SHARED_IMPORTS = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [CensorDirective],
   imports: [SHARED_IMPORTS],
-  exports: [SHARED_IMPORTS],
+  exports: [SHARED_IMPORTS, CensorDirective],
 })
 export class SharedModule {}
