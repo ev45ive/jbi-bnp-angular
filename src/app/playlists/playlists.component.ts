@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { mockPlaylists } from '../core/model/mockPlaylists';
+import { Playlist } from '../core/model/Playlist';
 
 type Modes = 'details' | 'editor';
 
@@ -9,12 +10,11 @@ type Modes = 'details' | 'editor';
   styleUrl: './playlists.component.scss',
 })
 export class PlaylistsComponent {
-  
   playlistsData = mockPlaylists;
   selectedId = '234';
   selected = mockPlaylists[1];
   selectPlaylistById(id: string) {
-    this.selectedId = id
+    this.selectedId = id;
     this.selected = this.playlistsData.find((p) => p.id == id)!;
   }
 
@@ -26,5 +26,9 @@ export class PlaylistsComponent {
 
   showEditor() {
     this.mode = 'editor';
+  }
+  
+  savePlaylist(draft: Playlist) {
+    console.log('Fake saving... ', draft);
   }
 }

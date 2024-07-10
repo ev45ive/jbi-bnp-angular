@@ -5,23 +5,12 @@
       [selectedId]="selectedId"
       (selectedIdChange)="selectPlaylistById($event)"
     />
-    <app-playlist-list
-      [items]="playlistsData"
-      [selectedId]="selectedId"
-      (selectedIdChange)="selectPlaylistById($event)"
-    />
   </div>
   <div>
-    {{ selected.name }}
-
     <ng-container [ngSwitch]="mode">
       <app-playlist-details *ngSwitchDefault [playlist]="selected" />
       <app-playlist-editor *ngSwitchCase="'editor'" [playlist]="selected" />
     </ng-container>
 
-    <div class="flex justify-between w-full">
-      <button mat-raised-button (click)="mode = 'details'">Cancel</button>
-      <button mat-flat-button (click)="mode = 'editor'">Edit</button>
-    </div>
   </div>
 </div>
