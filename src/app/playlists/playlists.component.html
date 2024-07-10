@@ -8,12 +8,11 @@
     <!-- <input type="text" [value]="selected.name" (keydown)="$event" /> -->
   </div>
   <div>
+    {{ selected.name }}
 
-    {{selected.name}}
-    
     <ng-container [ngSwitch]="mode">
-      <app-playlist-details *ngSwitchDefault />
-      <app-playlist-editor *ngSwitchCase="'editor'" />
+      <app-playlist-details *ngSwitchDefault [playlist]="selected" />
+      <app-playlist-editor *ngSwitchCase="'editor'" [playlist]="selected" />
     </ng-container>
 
     <div class="flex justify-between w-full">

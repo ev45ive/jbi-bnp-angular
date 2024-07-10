@@ -3,9 +3,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Input,
 } from '@angular/core';
 import { PlaylistsComponent } from '../../playlists.component';
 import { AppComponent } from '../../../app.component';
+import { Playlist } from '../../../core/model/Playlist';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -14,10 +16,5 @@ import { AppComponent } from '../../../app.component';
   // changeDetection: ChangeDetectionStrategy.OnPush, // d|-_-|b
 })
 export class PlaylistEditorComponent {
-  playlist = {
-    id: '123',
-    name: 'Playlist 123',
-    public: true,
-    description: 'Cool playlsit',
-  };
+  @Input({ required: true }) playlist!: Playlist;
 }

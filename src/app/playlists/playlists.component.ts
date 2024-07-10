@@ -14,6 +14,7 @@ export class PlaylistsComponent {
   selectedId = '234';
   selected = mockPlaylists[1];
   selectPlaylistById(id: string) {
+    this.selectedId = id
     this.selected = this.playlistsData.find((p) => p.id == id)!;
   }
 
