@@ -1,6 +1,7 @@
 <div class="grid grid-cols-2 gap-5">
   <div>
-    <app-playlist-list />
+    <app-playlist-list [items]="playlistsData" />
+    <!-- <input type="text" [value]="selected.name"  [pancakes]="'bananas'"> -->
   </div>
   <div>
     <ng-container [ngSwitch]="mode">

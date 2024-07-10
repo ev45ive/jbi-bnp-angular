@@ -10,11 +10,11 @@ type Modes = 'details' | 'editor';
 })
 export class PlaylistsComponent {
   
-  playlists = mockPlaylists;
+  playlistsData = mockPlaylists;
   selectedId = '234';
   selected = mockPlaylists[1];
   selectPlaylistById(id: string) {
-    this.selected = this.playlists.find((p) => p.id == id)!;
+    this.selected = this.playlistsData.find((p) => p.id == id)!;
   }
 
   mode: Modes = 'details';
