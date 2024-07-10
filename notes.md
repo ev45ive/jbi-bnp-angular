@@ -92,3 +92,16 @@ ng g c playlists/components/playlist-editor
 
 ng g m shared -m playlists 
 ng g d shared/directives/censor --export 
+
+
+# Music search  "module" vs standalone
+
+ng g m music -m app --route music --routing
+
+ng g c music/containers/album-search-view
+ng g c music/containers/album-details-view
+
+ng g c music/components/search-form
+ng g c music/components/results-grid
+ng g c music/components/album-card 
+

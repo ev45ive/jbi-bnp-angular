@@ -33,6 +33,7 @@ export class CensorDirective implements Validator {
 
   constructor(
     private elem: ElementRef<HTMLElement>,
+    // private api:BadWordAPIService
     // private model: NgModel,
     // private form: NgForm,
   ) {
