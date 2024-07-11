@@ -3,7 +3,7 @@ import { mockAlbums } from '../model/mockAlbums';
 import { environment } from '../../../environments/environment';
 import { API_URL } from '../../tokens';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AlbumResponse, AlbumSearchResponse } from '../model/Album';
 
@@ -16,19 +16,23 @@ export class MusicApiService {
   auth = inject(AuthService);
 
   searchAlbums(query = 'batman') {
-    return this.http.get<AlbumSearchResponse>(this.api_url + 'search', {
-      headers: {
-        Authorization: `Bearer ${this.auth.token}`,
-      },
-      params: {
-        type: 'album',
-        q: query,
-      },
-    }).pipe(
-      // step 2, 
-      // step 3 
-      // step 4 
-    )
+    // return of(mockAlbums)
+
+    return this.http
+      .get<AlbumSearchResponse>(this.api_url + 'search', {
+        headers: {
+          Authorization: `Bearer ${this.auth.token}`,
+        },
+        params: {
+          type: 'album',
+          q: query,
+        },
+      })
+      .pipe
+      // step 2,
+      // step 3
+      // step 4
+      ();
     // ---------A----B-----C---C------>
 
     // next: ---O---O---O>
@@ -38,7 +42,5 @@ export class MusicApiService {
     // ^--------R|>
     //          v
     // ^--------a|>
-     
-
   }
 }

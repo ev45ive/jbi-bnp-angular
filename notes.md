@@ -134,5 +134,25 @@ https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
 
 https://rxmarbles.com/
 http://rxmarbles.com/
+https://rxviz.com/
 
+
+# RxViz
+```js
+const { interval, from, timer } = Rx;
+const { take, delay, delayWhen } = RxOperators;
+
+interval(1000).pipe(
+  take(4)
+)
+
+from([10,20,30]).pipe(
+   delay(1000 )
+)
+
+
+from([40,10,20,30]).pipe(
+   delayWhen((x) => timer(x*100) )
+)
+```
 
