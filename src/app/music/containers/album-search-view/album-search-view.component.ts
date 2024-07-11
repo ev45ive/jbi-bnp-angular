@@ -6,6 +6,7 @@ import { Album } from '../../../core/model/Album';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   EMPTY,
+  Subject,
   Subscription,
   catchError,
   concatMap,
@@ -15,6 +16,7 @@ import {
   map,
   mergeMap,
   switchMap,
+  takeUntil,
 } from 'rxjs';
 
 @Component({
@@ -32,25 +34,26 @@ export class AlbumSearchViewComponent {
   query = '';
   results: Album[] = [];
   message = '';
+  sub = new Subject(); // EventEmitter(async:true) Expression has been chagned after checked!
 
   queryChanges = this.route.queryParamMap.pipe(
     map((pm) => pm.get('q')),
     filter(Boolean),
+    takeUntil(this.sub),
   );
 
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
+    takeUntil(this.sub),
   );
 
-  sub = new Subscription(); // Nested subscriptions
-
   ngOnInit(): void {
-    this.sub.add(this.queryChanges.subscribe((q) => (this.query = q)));
-    this.sub.add(this.resultsChanges.subscribe((res) => (this.results = res)));
+    this.queryChanges.subscribe((q) => (this.query = q));
+    this.resultsChanges.subscribe((res) => (this.results = res));
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.sub.next(null);
   }
 
   searchAlbums(query = '') {
