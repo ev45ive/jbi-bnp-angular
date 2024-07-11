@@ -4,7 +4,7 @@ import { SearchFormComponent } from '../../components/search-form/search-form.co
 import { MusicApiService } from '../../../core/services/music-api.service';
 import { Album } from '../../../core/model/Album';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { concatMap, exhaustAll, exhaustMap, filter, map, mergeMap, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-album-search-view',
@@ -27,11 +27,19 @@ export class AlbumSearchViewComponent {
     filter(Boolean),
   );
 
-  // Observable<Observable<AlbumResponse[]>>
-  resultsChanges = this.queryChanges.pipe(map((q) => this.api.searchAlbums(q)));
+  resultsChanges = this.queryChanges.pipe(
+    // map((q) => this.api.searchAlbums(q)) // Observable<Observable<AlbumResponse[]>>
+    // mergeMap((q) => this.api.searchAlbums(q)), // all without order
+    // concatMap((q) => this.api.searchAlbums(q)), // all in sequence
+    // exhaustMap((q) => this.api.searchAlbums(q)), // throttle - 1 one, ignore others
+    switchMap((q) => this.api.searchAlbums(q)), // debounce - newest one, cancel old
+  );
 
   ngOnInit(): void {
     this.queryChanges.subscribe((q) => (this.query = q));
+    this.resultsChanges.subscribe((res) => (this.results = res));
+
+    // this.resultsChanges.subscribe( obs => obs.subscribe( res => {} ))
 
     // this.queryChanges.subscribe((q) => {
     //   this.api.searchAlbums(q).subscribe({
