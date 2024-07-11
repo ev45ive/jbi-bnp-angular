@@ -9,8 +9,10 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
@@ -37,7 +39,8 @@ export class SearchFormComponent {
     this.search.emit(this.query);
   }
 
-  bob = inject(FormBuilder);
+  // bob = inject(FormBuilder);
+  bob = inject(NonNullableFormBuilder);
 
   searchForm = this.bob.group({
     query: ['batman'],
@@ -58,14 +61,16 @@ export class SearchFormComponent {
     const valueChanges = queryField.valueChanges;
     
     valueChanges.pipe(
-      // Minium 3 characters 
+      // Minium 3 characters
+      filter(q => q?.length >= 3),
 
       // No duplicates
+      distinctUntilChanged((a,b)=>a===b),
 
       // wait for 500ms silence 
+      debounceTime(500),
 
     ).subscribe(console.log)
-    
   }
 
   markets = this.searchForm.get([
