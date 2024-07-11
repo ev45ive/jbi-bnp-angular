@@ -44,10 +44,6 @@ export class AlbumSearchViewComponent {
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
     shareReplay(1, 10_000),
-    // share({
-    //   connector: () => new Subject(),
-    //   resetOnRefCountZero: true,
-    // }),
   );
 
   searchAlbums(query = '') {

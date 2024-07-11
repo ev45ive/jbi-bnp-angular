@@ -1,17 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { mockAlbums } from '../model/mockAlbums';
-import { environment } from '../../../environments/environment';
-import { API_URL } from '../../tokens';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
-  EMPTY,
-  Observable,
-  Subscription,
-  catchError,
-  delay,
-  from,
   map,
-  of,
 } from 'rxjs';
 import { AuthService } from './auth.service';
 import {
