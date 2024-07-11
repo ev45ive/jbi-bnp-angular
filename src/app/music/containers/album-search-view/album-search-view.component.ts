@@ -15,8 +15,13 @@ export class AlbumSearchViewComponent {
   api = inject(MusicApiService);
 
   results: Album[] = [];
+  message = ''
 
   searchAlbums(query = '') {
-    this.results = this.api.searchAlbums(query);
+    this.api.searchAlbums(query).subscribe({
+      next: (res) => (this.results = res),
+      error: (error) => (this.message = error.error.error.message),
+      // complete: () => console.log('complete'),
+    });
   }
 }

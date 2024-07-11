@@ -3,6 +3,11 @@
     <app-search-form (search)="searchAlbums($event)" />
   </div>
   <div>
+    @if (message) {
+      <div class="text-red-500 my-2">
+        {{ message }}
+      </div>
+    }
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4">
       @for (item of results; track item) {
         <app-album-card [album]="item" />
