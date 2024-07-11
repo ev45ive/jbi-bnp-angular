@@ -21,6 +21,8 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
+  map,
+  withLatestFrom,
 } from 'rxjs';
 
 @Component({
@@ -59,10 +61,9 @@ export class SearchFormComponent {
       const handler = setTimeout(() => {
         if (String(control.value).includes(this.badword)) {
           subscriber.next({ censor: { badword: this.badword } });
-          subscriber.complete() // stop pending!
-        }
-        subscriber.next(null);
-      }, 2000);
+        } else subscriber.next(null);
+        subscriber.complete(); // stop pending!
+      }, 500);
       return () => clearTimeout(handler);
     });
   };
@@ -90,14 +91,16 @@ export class SearchFormComponent {
 
     //  Multicasting Observable
     const valueChanges = queryField.valueChanges;
+    const statusChanges = queryField.statusChanges;
 
-    valueChanges
+    const searchChanges = statusChanges
       .pipe(
+        withLatestFrom(valueChanges),
+        filter(([status, value]) => status === 'VALID'),
+        map(([status, value]) => value),
+
         // wait for 500ms silence
         debounceTime(500),
-
-        // Minium 3 characters
-        filter((q) => q?.length >= 3),
 
         // No duplicates
         distinctUntilChanged((a, b) => a === b),
