@@ -20,43 +20,28 @@ import {
 } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-// function takeUntilDestroyed<T>() {
-//   const sub = new Subject();
-//   inject(DestroyRef).onDestroy(() => sub.next(null));
-//   return takeUntil<T>(sub);
-// }
+import { SHARED_IMPORTS } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-album-search-view',
   standalone: true,
-  imports: [AlbumCardComponent, SearchFormComponent],
+  imports: [SHARED_IMPORTS, AlbumCardComponent, SearchFormComponent],
   templateUrl: './album-search-view.component.html',
   styleUrl: './album-search-view.component.scss',
 })
 export class AlbumSearchViewComponent {
   api = inject(MusicApiService);
   router = inject(Router);
-  route = inject(ActivatedRoute); // current route in router-outlet
-
-  query = '';
-  message = '';
-  results: Album[] = [];
+  route = inject(ActivatedRoute);
 
   queryChanges = this.route.queryParamMap.pipe(
     map((pm) => pm.get('q')),
     filter(Boolean),
-    takeUntilDestroyed(),
   );
 
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
-    takeUntilDestroyed(),
   );
-
-  ngOnInit(): void {
-    this.queryChanges.subscribe((q) => (this.query = q));
-    this.resultsChanges.subscribe((res) => (this.results = res));
-  }
 
   searchAlbums(query = '') {
     this.router.navigate([], {
