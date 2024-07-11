@@ -4,32 +4,35 @@
 
   <div class="grid gap-5">
     <div class="grid gap-2">
-      <label>Name</label>
-      <input
-        type="text"
-        class="border border-solid border-gray-400"
-        [ngModel]="playlist.name"
-        name="name"
-        #localInputRef
-        #localModelRef="ngModel"
-        required
-        minlength="3"
-        appCensor="watman"
-      />
+      <mat-form-field class="flex-1">
+        <mat-label>Name</mat-label>
 
+        <input
+          type="text"
+          class="border border-solid border-gray-400"
+          [ngModel]="playlist.name"
+          matInput
+          name="name"
+          #localInputRef
+          #localModelRef="ngModel"
+          required
+          minlength="3"
+          appCensor="watman"
+        />
+        <mat-hint> {{ localModelRef.value?.length }} / 100 </mat-hint>
+        <mat-error>
+          @if (localModelRef.hasError("required")) {
+            Name is required
+          }
+          @if (localModelRef.getError("minlength"); as error) {
+            Mininum length is "{{ error.requiredLength }}"
+          }
+          @if (localModelRef.getError("censor"); as error) {
+            Cant contain "{{ error.badword }}"
+          }
+        </mat-error>
+      </mat-form-field>
       <!-- <pre>{{ localModelRef.errors | json }}</pre> -->
-
-      @if (localModelRef.hasError("required")) {
-        Name is required
-      }
-      @if (localModelRef.getError("minlength"); as error) {
-        Mininum length is "{{ error.requiredLength }}"
-      }
-      @if (localModelRef.getError("censor"); as error) {
-        Cant contain "{{ error.badword }}"
-      }
-
-      <div class="text-right">{{ localModelRef.value?.length }} / 100</div>
     </div>
 
     <div class="grid gap-2">
