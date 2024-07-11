@@ -2,7 +2,7 @@
 // Swagger/OpenAPI -> Typescript 
 
 export interface AlbumSearchResponse {
-  albums: PaginingObject<AlbumResponse>
+  albums: PagingObject<AlbumResponse>
 }
 export interface AlbumResponse {
   album_type:             string;
@@ -19,7 +19,7 @@ export interface AlbumResponse {
   type:                   string;
   uri:                    string;
   artists:                Artist[];
-  tracks:                 PaginingObject<Track>;
+  tracks:                 PagingObject<Track>;
   copyrights:             Copyright[];
   external_ids:           ExternalIDS;
   genres:                 string[];
@@ -67,7 +67,7 @@ export interface Restrictions {
   reason: string;
 }
 
-export interface PaginingObject<T> {
+export interface PagingObject<T> {
   href:     string;
   limit:    number;
   next:     string;

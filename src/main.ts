@@ -10,7 +10,18 @@ import { provideRouter } from '@angular/router';
 import routes from './app/app-routing.module';
 import { API_URL } from './app/tokens';
 import { environment } from './environments/environment';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHandler,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import {
+  ErrorInterceptor,
+  URLInterceptor,
+  authInterceptor,
+} from './app/core/interceptors/auth.interceptor';
 
 // platformBrowserDynamic().bootstrapModule(AppModule, {
 //   ngZoneEventCoalescing: true
@@ -24,13 +35,18 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(
       withFetch(),
       // withHttpTransferCacheOptions({}), //SSR
+      withInterceptors([URLInterceptor, authInterceptor, ErrorInterceptor]),
     ),
+    // {
+    //   provide: HttpHandler,
+    //   useClass: MuchBetterHttpHandler
+    // },
     provideRouter(routes),
     {
       provide: API_URL,
       useValue: {
         url: environment.apiConfig.url,
       },
-    }
+    },
   ],
 });

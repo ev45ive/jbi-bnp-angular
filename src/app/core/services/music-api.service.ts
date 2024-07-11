@@ -14,65 +14,42 @@ import {
   of,
 } from 'rxjs';
 import { AuthService } from './auth.service';
-import { AlbumResponse, AlbumSearchResponse } from '../model/Album';
+import {
+  AlbumResponse,
+  AlbumSearchResponse,
+  PagingObject,
+} from '../model/Album';
+import { Playlist } from '../model/Playlist';
 
 @Injectable({
   providedIn: 'root', // Singleton lazy
 })
 export class MusicApiService {
-  api_url = inject(API_URL).url;
   http = inject(HttpClient);
   auth = inject(AuthService);
 
   searchAlbums(query = 'batman') {
-    // return of(mockAlbums)
-
     return this.http
-      .get<AlbumSearchResponse>(this.api_url + 'search', {
-        headers: {
-          Authorization: `Bearer ${this.auth.token}`,
-        },
+      .get<AlbumSearchResponse>('search', {
         params: {
           type: 'album',
           q: query,
         },
       })
-      .pipe(
-        catchError((error, originalObs) => {
-          if (
-            error instanceof HttpErrorResponse &&
-            isSpotifyErrorResponse(error.error)
-          )
-            throw new Error(error.error.error.message);
-          throw new Error('Unknown error');
-        }),
-        map((res) => res.albums.items),
-      );
-    // ---------A----B-----C---C------>
-
-    // next: ---O---O---O>
-    // errors: ---X>
-    // complete: --|>
-
-    // ^--------R|>
-    //          v - map (R -> a)
-    // ^--------a|>
+      .pipe(map((res) => res.albums.items));
   }
-}
 
-interface SpotifyErrorResponse {
-  error: {
-    code: number;
-    message: string;
-  };
-}
+  getAlbumById(id = '') {
+    return this.http.get<AlbumResponse>(`albums/${id}`);
+  }
 
-function isSpotifyErrorResponse(error: any): error is SpotifyErrorResponse {
-  return (
-    error &&
-    'error' in error &&
-    error.error &&
-    'message' in error &&
-    typeof error.error.message == 'string'
-  );
+  getPlaylistById(id = '') {
+    return this.http.get<Playlist>(`playlists/${id}`);
+  }
+
+  getMyPlaylists() {
+    return this.http
+      .get<PagingObject<Playlist>>(`me/playlists`)
+      .pipe(map((res) => res.items));
+  }
 }
