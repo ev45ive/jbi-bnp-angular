@@ -129,3 +129,10 @@ placki7777
 ## App initializer
 https://v17.angular.io/api/core/APP_INITIALIZER
 
+## RxJS
+https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+
+https://rxmarbles.com/
+http://rxmarbles.com/
+
+

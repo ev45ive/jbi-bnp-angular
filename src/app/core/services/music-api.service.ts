@@ -24,6 +24,21 @@ export class MusicApiService {
         type: 'album',
         q: query,
       },
-    });
+    }).pipe(
+      // step 2, 
+      // step 3 
+      // step 4 
+    )
+    // ---------A----B-----C---C------>
+
+    // next: ---O---O---O>
+    // errors: ---X>
+    // complete: --|>
+
+    // ^--------R|>
+    //          v
+    // ^--------a|>
+     
+
   }
 }
