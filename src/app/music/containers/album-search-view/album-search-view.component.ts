@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, DestroyRef, Inject, inject } from '@angular/core';
 import { AlbumCardComponent } from '../../components/album-card/album-card.component';
 import { SearchFormComponent } from '../../components/search-form/search-form.component';
 import { MusicApiService } from '../../../core/services/music-api.service';
@@ -19,6 +19,13 @@ import {
   takeUntil,
 } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+// function takeUntilDestroyed<T>() {
+//   const sub = new Subject();
+//   inject(DestroyRef).onDestroy(() => sub.next(null));
+//   return takeUntil<T>(sub);
+// }
+
 @Component({
   selector: 'app-album-search-view',
   standalone: true,
@@ -32,28 +39,23 @@ export class AlbumSearchViewComponent {
   route = inject(ActivatedRoute); // current route in router-outlet
 
   query = '';
-  results: Album[] = [];
   message = '';
-  sub = new Subject(); // EventEmitter(async:true) Expression has been chagned after checked!
+  results: Album[] = [];
 
   queryChanges = this.route.queryParamMap.pipe(
     map((pm) => pm.get('q')),
     filter(Boolean),
-    takeUntil(this.sub),
+    takeUntilDestroyed(),
   );
 
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
-    takeUntil(this.sub),
+    takeUntilDestroyed(),
   );
 
   ngOnInit(): void {
     this.queryChanges.subscribe((q) => (this.query = q));
     this.resultsChanges.subscribe((res) => (this.results = res));
-  }
-
-  ngOnDestroy(): void {
-    this.sub.next(null);
   }
 
   searchAlbums(query = '') {
