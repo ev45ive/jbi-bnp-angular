@@ -126,3 +126,6 @@ ng g s core/services/auth
 wivoba7552@kinsef.com
 placki7777
 
+## App initializer
+https://v17.angular.io/api/core/APP_INITIALIZER
+
