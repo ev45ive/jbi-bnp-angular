@@ -61,14 +61,14 @@ export class SearchFormComponent {
     const valueChanges = queryField.valueChanges;
     
     valueChanges.pipe(
-      // Minium 3 characters
-      filter(q => q?.length >= 3),
-
-      // No duplicates
-      distinctUntilChanged((a,b)=>a===b),
-
       // wait for 500ms silence 
       debounceTime(500),
+
+      // Minium 3 characters
+      filter(q => q?.length >= 3),
+      
+      // No duplicates
+      distinctUntilChanged((a,b)=>a===b),
 
     ).subscribe(console.log)
   }
