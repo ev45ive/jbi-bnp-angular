@@ -3,6 +3,8 @@ import { AlbumCardComponent } from '../../components/album-card/album-card.compo
 import { SearchFormComponent } from '../../components/search-form/search-form.component';
 import { MusicApiService } from '../../../core/services/music-api.service';
 import { Album } from '../../../core/model/Album';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-album-search-view',
@@ -13,17 +15,32 @@ import { Album } from '../../../core/model/Album';
 })
 export class AlbumSearchViewComponent {
   api = inject(MusicApiService);
+  router = inject(Router);
+  route = inject(ActivatedRoute); // current route in router-outlet
 
+  query = '';
   results: Album[] = [];
   message = '';
 
-  searchAlbums(query = '') {
-    this.message = ''
-    this.results = []
+  queryChanges = this.route.queryParamMap.pipe(
+    map((pm) => pm.get('q')),
+    filter(Boolean),
+  );
 
-    this.api.searchAlbums(query).subscribe({
-      next: (albums) => (this.results = albums),
-      error: (error) => (this.message = error.message),
+  ngOnInit(): void {
+    this.queryChanges.subscribe((q) => (this.query = q));
+    this.queryChanges.subscribe((q) => {
+      this.api.searchAlbums(q).subscribe({
+        next: (albums) => (this.results = albums),
+        error: (error) => (this.message = error.message),
+      });
+    });
+  }
+
+  searchAlbums(query = '') {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: query },
     });
   }
 }
