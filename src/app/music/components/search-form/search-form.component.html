@@ -1,48 +1,50 @@
-
-    <form (submit)="submit()">
-      <div class="flex">
-        <mat-form-field class="flex-1" appearance="fill">
-          <mat-label>Search</mat-label>
-          <input type="text" matInput [(ngModel)]="query" name="query" />
-          <mat-hint></mat-hint>
-          <mat-error></mat-error>
-        </mat-form-field>
-        <div class="relative">
-            <button mat-fab color="primary" type="submit" class="absolute right-5 bottom-1">
-              <mat-icon>search</mat-icon>
-            </button>
+<form (submit)="submit()" [formGroup]="searchForm">
+  <div class="flex">
+    <mat-form-field class="flex-1" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input type="text" matInput formControlName="query" />
+      <mat-hint></mat-hint>
+      <mat-error></mat-error>
+    </mat-form-field>
+    <div class="relative">
+      <button
+        mat-fab
+        color="primary"
+        type="submit"
+        class="absolute right-5 bottom-1"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="text-end" (click)="isAdvanced = !isAdvanced">Advanced</div>
+    @if (isAdvanced) {
+      <div class="grid grid-cols-2 gap-5" formGroupName="advanced">
+        <div>
+          <mat-form-field class="w-full" appearance="fill">
+            <mat-label>Resource Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="album">Album</mat-option>
+              <mat-option value="artist">Artist</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        
-      </div>
-      <div>
-        <div class="text-end" (click)="isAdvanced = !isAdvanced">Advanced</div>
-        @if (isAdvanced) {
-          <div class="grid grid-cols-2 gap-5">
-            <div>
-              <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Resource Type</mat-label>
-                <mat-select>
-                  <mat-option value="album">Album</mat-option>
-                  <mat-option value="artist">Artist</mat-option>
-                </mat-select>
+        <div>
+          <h3>Markets</h3>
+          <div class="grid" formArrayName="markets">
+            @for (item of markets.controls; track $index) {
+              <mat-form-field class="w-full" [formGroup]="item">
+                <input type="text" matInput="" formControlName="code" />
               </mat-form-field>
-            </div>
-            <div>
-              <h3>Markets</h3>
-              <div class="grid" formArrayName="markets">
-                @for (item of [1, 2, 3]; track $index) {
-                  <mat-form-field class="w-full">
-                    <input type="text" matInput="" />
-                  </mat-form-field>
-                }
-                <button type="button" mat-raised-button="" (click)="(0)">
-                  Add market
-                </button>
-              </div>
-            </div>
-          <pre>{{searchForm.value | json}}</pre>
+            }
+            <button type="button" mat-raised-button="" (click)="addMarket()">
+              Add market
+            </button>
           </div>
-        }
+        </div>
+        <pre>{{ searchForm.value | json }}</pre>
       </div>
-    </form>
-    
+    }
+  </div>
+</form>

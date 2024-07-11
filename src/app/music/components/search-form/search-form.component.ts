@@ -5,6 +5,7 @@ import {
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -49,6 +50,17 @@ export class SearchFormComponent {
       ]),
     }),
   });
+
+  markets = this.searchForm.get([
+    'advanced',
+    'markets',
+  ]) as FormArray<FormGroup>;
+
+  addMarket(){
+    this.markets.push(this.bob.group({
+      code:['']
+    }))
+  }
 
   // searchForm = new FormGroup({
   //   query: new FormControl('batman')
