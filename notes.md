@@ -109,3 +109,6 @@ ng g s core/services/music-api
 
 ## Navigation
 ng generate @angular/material:navigation core/layouts/main-navigation
+
+# The loop
+https://www.youtube.com/watch?v=cCOL7MC4Pl0&ab_channel=JSConf
