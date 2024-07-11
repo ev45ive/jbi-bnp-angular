@@ -86,26 +86,23 @@ export class SearchFormComponent {
     }),
   });
 
+  queryField = this.searchForm.get('query')!;
+  valueChanges = this.queryField.valueChanges;
+  statusChanges = this.queryField.statusChanges;
+
+  validChanges = this.statusChanges.pipe(
+    withLatestFrom(this.valueChanges),
+    filter(([status, value]) => status === 'VALID'),
+    map(([status, value]) => value),
+  );
+
+  searchChanges = this.validChanges.pipe(
+    debounceTime(500),
+    distinctUntilChanged((a, b) => a === b),
+  );
+  
   ngOnInit(): void {
-    const queryField = this.searchForm.get('query')!;
-
-    //  Multicasting Observable
-    const valueChanges = queryField.valueChanges;
-    const statusChanges = queryField.statusChanges;
-
-    const searchChanges = statusChanges
-      .pipe(
-        withLatestFrom(valueChanges),
-        filter(([status, value]) => status === 'VALID'),
-        map(([status, value]) => value),
-
-        // wait for 500ms silence
-        debounceTime(500),
-
-        // No duplicates
-        distinctUntilChanged((a, b) => a === b),
-      )
-      .subscribe((q) => this.search.emit(q));
+    this.searchChanges.subscribe((q) => this.search.emit(q));
   }
 
   markets = this.searchForm.get([
