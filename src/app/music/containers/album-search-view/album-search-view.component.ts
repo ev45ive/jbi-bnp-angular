@@ -16,6 +16,7 @@ import {
   map,
   mergeMap,
   share,
+  shareReplay,
   switchMap,
   takeUntil,
 } from 'rxjs';
@@ -42,7 +43,7 @@ export class AlbumSearchViewComponent {
 
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
-    share()
+    shareReplay(1, 10_000),
     // share({
     //   connector: () => new Subject(),
     //   resetOnRefCountZero: true,
