@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { mockAlbums } from '../model/mockAlbums';
 import { environment } from '../../../environments/environment';
 import { API_URL } from '../../tokens';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   EMPTY,
   Observable,
@@ -39,17 +39,12 @@ export class MusicApiService {
       })
       .pipe(
         catchError((error, originalObs) => {
-          
-          throw new Error(error.error.error.message)
-
-          // return originalObs // retry (forever!)
-          // return from([mockAlbums, mockAlbums]).pipe(delay(100));
-          // return this.http.get('other server ').pipe(/* ... */);
-          // return of(mockAlbums);
-          // return [mockAlbums]; // --O|>
-          // return [[], [], []]; // --OOO|>
-          // return []; // -|>
-          // return EMPTY; // -|>
+          if (
+            error instanceof HttpErrorResponse &&
+            isSpotifyErrorResponse(error.error)
+          )
+            throw new Error(error.error.error.message);
+          throw new Error('Unknown error');
         }),
         map((res) => res.albums.items),
       );
@@ -63,4 +58,21 @@ export class MusicApiService {
     //          v - map (R -> a)
     // ^--------a|>
   }
+}
+
+interface SpotifyErrorResponse {
+  error: {
+    code: number;
+    message: string;
+  };
+}
+
+function isSpotifyErrorResponse(error: any): error is SpotifyErrorResponse {
+  return (
+    error &&
+    'error' in error &&
+    error.error &&
+    'message' in error &&
+    typeof error.error.message == 'string'
+  );
 }
