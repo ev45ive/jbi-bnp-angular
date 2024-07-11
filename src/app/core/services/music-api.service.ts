@@ -3,7 +3,7 @@ import { mockAlbums } from '../model/mockAlbums';
 import { environment } from '../../../environments/environment';
 import { API_URL } from '../../tokens';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription, map, of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AlbumResponse, AlbumSearchResponse } from '../model/Album';
 
@@ -28,11 +28,9 @@ export class MusicApiService {
           q: query,
         },
       })
-      .pipe
-      // step 2,
-      // step 3
-      // step 4
-      ();
+      .pipe(
+        map(res => res.albums.items)
+      );
     // ---------A----B-----C---C------>
 
     // next: ---O---O---O>
@@ -40,7 +38,7 @@ export class MusicApiService {
     // complete: --|>
 
     // ^--------R|>
-    //          v
+    //          v - map (R -> a)
     // ^--------a|>
   }
 }
