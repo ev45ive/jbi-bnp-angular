@@ -106,3 +106,15 @@ ng g c music/components/results-grid
 ng g c music/components/album-card 
 
 ng g s core/services/music-api
+
+
+# Module federation
+
+npm i @angular-architects/native-federation -D
+
+ng g application shell --style scss --ssr true
+ng g application mfe1 --style scss --ssr true
+
+ng g @angular-architects/native-federation:init --project mfe1 --port 4201 --type remote
+ng g @angular-architects/native-federation:init --project shell --port 4200 --type dynamic-host
+
