@@ -1,11 +1,11 @@
 <form (submit)="submit()" [formGroup]="searchForm">
   <div class="flex">
+    @if (searchForm.get("query"); as field) {
     <mat-form-field class="flex-1" appearance="fill">
       <mat-label>Search</mat-label>
       <input type="text" matInput formControlName="query" />
-      <mat-hint> {{ searchForm.get("query")?.value?.length }} / 100 </mat-hint>
+      <mat-hint> @if(field.pending){ PLease wait ...} </mat-hint>
       <mat-error>
-        @if (searchForm.get("query"); as field) {
           @if (field.hasError("required")) {
             Name is required
           }
@@ -15,9 +15,9 @@
           @if (field.getError("censor"); as error) {
             Cant contain "{{ error.badword }}"
           }
-        }
-      </mat-error>
-    </mat-form-field>
+        </mat-error>
+      </mat-form-field>
+    }
     <div class="relative">
       <button
         mat-fab
