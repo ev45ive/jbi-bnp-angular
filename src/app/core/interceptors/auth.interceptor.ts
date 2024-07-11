@@ -69,7 +69,7 @@ function isSpotifyErrorResponse(error: any): error is SpotifyErrorResponse {
     error &&
     'error' in error &&
     error.error &&
-    'message' in error &&
+    'message' in error.error &&
     typeof error.error.message == 'string'
   );
 }

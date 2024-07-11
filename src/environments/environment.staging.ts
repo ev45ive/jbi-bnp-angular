@@ -3,6 +3,5 @@ export const environment = {
     apiConfig: { url: '/' },
     //   envSUPER_SECRET : process.env['SUPER_SECRET']// No!
 
-    path: process.env['PATH']
   };
   
