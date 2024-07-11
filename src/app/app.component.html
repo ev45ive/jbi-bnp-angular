@@ -2,9 +2,12 @@
   <!-- content -->
 
   <ng-container ngProjectAs="toolbar">
-    <h1 class="text-3xl font-bold text-red-600 underline" (click)="(0)">
-      Hello {{ title.toLocaleUpperCase() }} !
-    </h1>
+    <div class="flex justify-between items-center w-full">
+      <h1 class="text-3xl font-bold text-red-600 underline" (click)="(0)">
+        Hello {{ title.toLocaleUpperCase() }} !
+      </h1>
+      <button mat-flat-button (click)="login()">Login</button>
+    </div>
   </ng-container>
   
   <div class="container">

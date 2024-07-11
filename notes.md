@@ -112,3 +112,17 @@ ng generate @angular/material:navigation core/layouts/main-navigation
 
 # The loop
 https://www.youtube.com/watch?v=cCOL7MC4Pl0&ab_channel=JSConf
+
+
+# Auth
+
+https://developer.spotify.com/documentation/web-api/tutorials/implicit-flow
+
+ng g s core/services/auth
+
+
+# Spotify
+
+wivoba7552@kinsef.com
+placki7777
+

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment';
 import { API_URL } from './tokens';
 import { MainNavigationComponent } from './core/layouts/main-navigation/main-navigation.component';
 import { SHARED_IMPORTS } from './shared/shared.module';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,4 +17,13 @@ import { SHARED_IMPORTS } from './shared/shared.module';
 })
 export class AppComponent {
   title = 'jbibnp';
+  auth = inject(AuthService);
+
+  ngOnInit(): void {
+    this.auth.checkLogin();
+  }
+  
+  login() {
+    this.auth.initLogin();
+  }
 }
