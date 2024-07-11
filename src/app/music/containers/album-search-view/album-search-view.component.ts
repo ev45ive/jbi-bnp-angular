@@ -4,7 +4,17 @@ import { SearchFormComponent } from '../../components/search-form/search-form.co
 import { MusicApiService } from '../../../core/services/music-api.service';
 import { Album } from '../../../core/model/Album';
 import { ActivatedRoute, Router } from '@angular/router';
-import { concatMap, exhaustAll, exhaustMap, filter, map, mergeMap, switchMap } from 'rxjs';
+import {
+  EMPTY,
+  catchError,
+  concatMap,
+  exhaustAll,
+  exhaustMap,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-album-search-view',
@@ -28,11 +38,8 @@ export class AlbumSearchViewComponent {
   );
 
   resultsChanges = this.queryChanges.pipe(
-    // map((q) => this.api.searchAlbums(q)) // Observable<Observable<AlbumResponse[]>>
-    // mergeMap((q) => this.api.searchAlbums(q)), // all without order
-    // concatMap((q) => this.api.searchAlbums(q)), // all in sequence
-    // exhaustMap((q) => this.api.searchAlbums(q)), // throttle - 1 one, ignore others
-    switchMap((q) => this.api.searchAlbums(q)), // debounce - newest one, cancel old
+    switchMap((q) => this.api.searchAlbums(q)
+      .pipe(catchError(() => EMPTY))), // protect outer pipe from error
   );
 
   ngOnInit(): void {
