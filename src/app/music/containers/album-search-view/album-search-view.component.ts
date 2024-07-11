@@ -18,6 +18,9 @@ export class AlbumSearchViewComponent {
   message = '';
 
   searchAlbums(query = '') {
+    this.message = ''
+    this.results = []
+
     this.api.searchAlbums(query).subscribe({
       next: (albums) => (this.results = albums),
       error: (error) => (this.message = error.message),

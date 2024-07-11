@@ -19,8 +19,8 @@
         @if (isAdvanced) {
           <div class="grid grid-cols-2 gap-5">
             <div>
-              <mat-form-field class="w-full">
-                <mat-label>Search</mat-label>
+              <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Resource Type</mat-label>
                 <mat-select>
                   <mat-option value="album">Album</mat-option>
                   <mat-option value="artist">Artist</mat-option>
@@ -28,6 +28,7 @@
               </mat-form-field>
             </div>
             <div>
+              <h3>Markets</h3>
               <div class="grid" formArrayName="markets">
                 @for (item of [1, 2, 3]; track $index) {
                   <mat-form-field class="w-full">
@@ -39,6 +40,7 @@
                 </button>
               </div>
             </div>
+          <pre>{{searchForm.value | json}}</pre>
           </div>
         }
       </div>
