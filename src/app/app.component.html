@@ -9,17 +9,33 @@
       <button mat-flat-button (click)="login()">Login</button>
     </div>
   </ng-container>
-  
+
   <div class="container">
     <router-outlet />
   </div>
-  
+
   <ng-container ngProjectAs="sidebar">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/">Home</a>
-      <a mat-list-item href="/playlists">Playlists </a>
-      <a mat-list-item href="/music">Music</a>
+      <a
+        mat-list-item
+        routerLink="/"
+        routerLinkActive="mdc-list-item--activated"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="mdc-list-item--activated"
+        routerLink="/playlists"
+        >Playlists
+      </a>
+      <a
+        mat-list-item
+        routerLinkActive="mdc-list-item--activated"
+        routerLink="/music"
+        >Music</a
+      >
     </mat-nav-list>
   </ng-container>
 </app-main-navigation>

@@ -14,10 +14,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CensorDirective } from './directives/censor.directive';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 // ng g shared -m playlists
 
 export const SHARED_IMPORTS = [
+  RouterLink,
+  RouterLinkActive,
   CommonModule,
   FormsModule,
   MatButtonModule,
