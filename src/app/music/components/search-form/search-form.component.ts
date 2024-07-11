@@ -15,7 +15,13 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import {
+  NEVER,
+  Observable,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+} from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
@@ -46,24 +52,38 @@ export class SearchFormComponent {
   bob = inject(NonNullableFormBuilder);
 
   badword = 'batman';
-  censor = (control: AbstractControl<any, any>): ValidationErrors | null => {
-    if (String(control.value).includes(this.badword)) {
-      return {
-        censor: { badword: this.badword },
-      };
-    }
-    return null;
+  censor = (
+    control: AbstractControl<any, any>,
+  ): Observable<ValidationErrors | null> => {
+    // const obs = new Observable<ValidationErrors | null> (); // NEVER
+
+    // UniCast  Observable
+    const obs = new Observable<ValidationErrors | null>((subscriber) => {
+      setTimeout(() => {
+        if (String(control.value).includes(this.badword)) {
+          subscriber.next( {
+            censor: { badword: this.badword },
+          })
+        }
+        subscriber.next(null);
+      }, 2000);
+    });
+
+    obs.subscribe({
+      next: console.log,
+      error: console.log,
+      complete: console.log,
+    });
+
+    return obs;
   };
 
   searchForm = this.bob.group({
     query: [
       'batman',
       {
-        validators: [
-          Validators.minLength(3),
-          Validators.required,
-          this.censor,
-        ],
+        validators: [Validators.minLength(3), Validators.required],
+        asyncValidators: [this.censor],
       },
     ],
     advanced: this.bob.group({
