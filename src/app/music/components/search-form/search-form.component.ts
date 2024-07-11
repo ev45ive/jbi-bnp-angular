@@ -59,21 +59,31 @@ export class SearchFormComponent {
 
     // UniCast  Observable
     const obs = new Observable<ValidationErrors | null>((subscriber) => {
-      setTimeout(() => {
+      const handler = setTimeout(() => {
         if (String(control.value).includes(this.badword)) {
-          subscriber.next( {
+          subscriber.next({
             censor: { badword: this.badword },
-          })
+          });
         }
         subscriber.next(null);
       }, 2000);
+      return () => clearTimeout(handler);
     });
 
-    obs.subscribe({
-      next: console.log,
-      error: console.log,
-      complete: console.log,
-    });
+    obs.pipe((prevOperator) => {
+        return new Observable((nextOperator) => {
+          prevOperator.subscribe({
+            next: (event) => nextOperator.next(/* transform it / map */event),
+            // todo: ERROR, COMPLETE
+          });
+        });
+      })
+      .subscribe({
+        next: console.log,
+        error: console.log,
+        complete: console.log,
+      })
+      .unsubscribe();
 
     return obs;
   };
