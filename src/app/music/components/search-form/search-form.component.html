@@ -3,8 +3,20 @@
     <mat-form-field class="flex-1" appearance="fill">
       <mat-label>Search</mat-label>
       <input type="text" matInput formControlName="query" />
-      <mat-hint></mat-hint>
-      <mat-error></mat-error>
+      <mat-hint> {{ searchForm.get("query")?.value?.length }} / 100 </mat-hint>
+      <mat-error>
+        @if (searchForm.get("query"); as field) {
+          @if (field.hasError("required")) {
+            Name is required
+          }
+          @if (field.getError("minlength"); as error) {
+            Mininum length is "{{ error.requiredLength }}"
+          }
+          @if (field.getError("censor"); as error) {
+            Cant contain "{{ error.badword }}"
+          }
+        }
+      </mat-error>
     </mat-form-field>
     <div class="relative">
       <button

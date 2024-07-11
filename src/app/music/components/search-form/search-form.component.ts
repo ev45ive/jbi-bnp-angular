@@ -5,12 +5,15 @@ import {
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
   ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 
@@ -42,8 +45,27 @@ export class SearchFormComponent {
   // bob = inject(FormBuilder);
   bob = inject(NonNullableFormBuilder);
 
+  badword = 'batman';
+  censor = (control: AbstractControl<any, any>): ValidationErrors | null => {
+    if (String(control.value).includes(this.badword)) {
+      return {
+        censor: { badword: this.badword },
+      };
+    }
+    return null;
+  };
+
   searchForm = this.bob.group({
-    query: ['batman'],
+    query: [
+      'batman',
+      {
+        validators: [
+          Validators.minLength(3),
+          Validators.required,
+          this.censor,
+        ],
+      },
+    ],
     advanced: this.bob.group({
       type: ['album'],
       markets: this.bob.array([
