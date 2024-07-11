@@ -40,6 +40,6 @@ export class AuthService {
       globalThis.location.hash = ''
       this.storage.setItem('token', access_token);
     }
-    this.token = access_token || this.storage.getItem('token') || '';
+    this.token = access_token || this.storage?.getItem('token') || '';
   }
 }

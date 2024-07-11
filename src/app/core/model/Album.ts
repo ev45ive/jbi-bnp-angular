@@ -1,6 +1,9 @@
 // Quicktype
 // Swagger/OpenAPI -> Typescript 
 
+export interface AlbumSearchResponse {
+  albums: PaginingObject<AlbumResponse>
+}
 export interface AlbumResponse {
   album_type:             string;
   total_tracks:           number;

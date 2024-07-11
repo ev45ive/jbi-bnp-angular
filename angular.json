@@ -97,6 +97,9 @@
             },
             "development": {
               "buildTarget": "jbibnp:build:development"
+            },
+            "staging": {
+              "buildTarget": "jbibnp:build:staging"
             }
           },
           "defaultConfiguration": "development"

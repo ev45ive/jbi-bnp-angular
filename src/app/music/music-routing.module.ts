@@ -10,6 +10,11 @@ const routes: Routes = [
     component: MusicComponent,
     children: [
       {
+        path: '',
+        redirectTo: '/music/search',
+        pathMatch: 'full',
+      },
+      {
         path: 'search',
         component: AlbumSearchViewComponent,
       },
@@ -20,7 +25,7 @@ const routes: Routes = [
     ],
   },
 ];
-export default routes
+export default routes;
 
 // @NgModule({
 //   imports: [RouterModule.forChild(routes)],

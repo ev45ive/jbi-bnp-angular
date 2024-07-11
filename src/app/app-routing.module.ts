@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/playlists',
+    redirectTo: '/music/search',
     pathMatch: 'full',
     // component: PageNotFound
   },

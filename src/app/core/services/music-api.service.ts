@@ -4,6 +4,8 @@ import { environment } from '../../../environments/environment';
 import { API_URL } from '../../tokens';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
+import { AuthService } from './auth.service';
+import { AlbumResponse, AlbumSearchResponse } from '../model/Album';
 
 @Injectable({
   providedIn: 'root', // Singleton lazy
@@ -11,20 +13,17 @@ import { Observable, Subscription } from 'rxjs';
 export class MusicApiService {
   api_url = inject(API_URL).url;
   http = inject(HttpClient);
-
-  constructor() {}
+  auth = inject(AuthService);
 
   searchAlbums(query = 'batman') {
-    const obs: Observable<any> = this.http.get(this.api_url + 'search', {
+    return this.http.get<AlbumSearchResponse>(this.api_url + 'search', {
       headers: {
-        Authorization: `Bearer ilikepancakesmuch`,
+        Authorization: `Bearer ${this.auth.token}`,
       },
       params: {
         type: 'album',
         q: query,
       },
     });
-
-    return obs;
   }
 }
