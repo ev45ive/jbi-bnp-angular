@@ -1,8 +1,22 @@
-<div class="container">
-  <h1 class="text-3xl font-bold text-red-600 underline" (click)="0">
-    Hello {{ title.toLocaleUpperCase() }} ! 
-  </h1>
+<app-main-navigation>
+  <!-- content -->
+
+  <ng-container ngProjectAs="toolbar">
+    <h1 class="text-3xl font-bold text-red-600 underline" (click)="(0)">
+      Hello {{ title.toLocaleUpperCase() }} !
+    </h1>
+  </ng-container>
   
-  <!-- Replaced by router -->
-  <router-outlet/>
-</div>
+  <div class="container">
+    <router-outlet />
+  </div>
+  
+  <ng-container ngProjectAs="sidebar">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/">Home</a>
+      <a mat-list-item href="/playlists">Playlists </a>
+      <a mat-list-item href="/music">Music</a>
+    </mat-nav-list>
+  </ng-container>
+</app-main-navigation>
