@@ -6,6 +6,7 @@ import { Album } from '../../../core/model/Album';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   EMPTY,
+  Subscription,
   catchError,
   concatMap,
   exhaustAll,
@@ -38,22 +39,18 @@ export class AlbumSearchViewComponent {
   );
 
   resultsChanges = this.queryChanges.pipe(
-    switchMap((q) => this.api.searchAlbums(q)
-      .pipe(catchError(() => EMPTY))), // protect outer pipe from error
+    switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
   );
 
+  sub = new Subscription(); // Nested subscriptions
+
   ngOnInit(): void {
-    this.queryChanges.subscribe((q) => (this.query = q));
-    this.resultsChanges.subscribe((res) => (this.results = res));
+    this.sub.add(this.queryChanges.subscribe((q) => (this.query = q)));
+    this.sub.add(this.resultsChanges.subscribe((res) => (this.results = res)));
+  }
 
-    // this.resultsChanges.subscribe( obs => obs.subscribe( res => {} ))
-
-    // this.queryChanges.subscribe((q) => {
-    //   this.api.searchAlbums(q).subscribe({
-    //     next: (albums) => (this.results = albums),
-    //     error: (error) => (this.message = error.message),
-    //   });
-    // });
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   searchAlbums(query = '') {
