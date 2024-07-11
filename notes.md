@@ -109,12 +109,16 @@ ng g s core/services/music-api
 
 
 # Module federation
+https://www.npmjs.com/package/@angular-architects/native-federation
 
 npm i @angular-architects/native-federation -D
 
 ng g application shell --style scss --ssr true
+ng g @angular-architects/native-federation:init --project shell --port 4200 --type dynamic-host
+
 ng g application mfe1 --style scss --ssr true
+ng g application mfe2 --style scss --ssr true
 
 ng g @angular-architects/native-federation:init --project mfe1 --port 4201 --type remote
-ng g @angular-architects/native-federation:init --project shell --port 4200 --type dynamic-host
+ng g @angular-architects/native-federation:init --project mfe2 --port 4201 --type remote
 
