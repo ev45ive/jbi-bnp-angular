@@ -56,21 +56,22 @@ export class SearchFormComponent {
 
   ngOnInit(): void {
     const queryField = this.searchForm.get('query')!;
+
     //  Multicasting Observable
-    // this.searchForm.valueChanges.subscribe(console.log)
     const valueChanges = queryField.valueChanges;
-    
-    valueChanges.pipe(
-      // wait for 500ms silence 
-      debounceTime(500),
 
-      // Minium 3 characters
-      filter(q => q?.length >= 3),
-      
-      // No duplicates
-      distinctUntilChanged((a,b)=>a===b),
+    valueChanges
+      .pipe(
+        // wait for 500ms silence
+        debounceTime(500),
 
-    ).subscribe(console.log)
+        // Minium 3 characters
+        filter((q) => q?.length >= 3),
+
+        // No duplicates
+        distinctUntilChanged((a, b) => a === b),
+      )
+      .subscribe((q) => this.search.emit(q));
   }
 
   markets = this.searchForm.get([
@@ -78,10 +79,12 @@ export class SearchFormComponent {
     'markets',
   ]) as FormArray<FormGroup>;
 
-  addMarket(){
-    this.markets.push(this.bob.group({
-      code:['']
-    }))
+  addMarket() {
+    this.markets.push(
+      this.bob.group({
+        code: [''],
+      }),
+    );
   }
 
   // searchForm = new FormGroup({
