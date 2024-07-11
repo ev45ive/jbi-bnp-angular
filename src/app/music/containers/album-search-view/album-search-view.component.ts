@@ -27,14 +27,18 @@ export class AlbumSearchViewComponent {
     filter(Boolean),
   );
 
+  // Observable<Observable<AlbumResponse[]>>
+  resultsChanges = this.queryChanges.pipe(map((q) => this.api.searchAlbums(q)));
+
   ngOnInit(): void {
     this.queryChanges.subscribe((q) => (this.query = q));
-    this.queryChanges.subscribe((q) => {
-      this.api.searchAlbums(q).subscribe({
-        next: (albums) => (this.results = albums),
-        error: (error) => (this.message = error.message),
-      });
-    });
+
+    // this.queryChanges.subscribe((q) => {
+    //   this.api.searchAlbums(q).subscribe({
+    //     next: (albums) => (this.results = albums),
+    //     error: (error) => (this.message = error.message),
+    //   });
+    // });
   }
 
   searchAlbums(query = '') {
