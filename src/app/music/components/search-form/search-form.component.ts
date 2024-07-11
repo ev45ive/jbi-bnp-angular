@@ -51,6 +51,23 @@ export class SearchFormComponent {
     }),
   });
 
+  ngOnInit(): void {
+    const queryField = this.searchForm.get('query')!;
+    //  Multicasting Observable
+    // this.searchForm.valueChanges.subscribe(console.log)
+    const valueChanges = queryField.valueChanges;
+    
+    valueChanges.pipe(
+      // Minium 3 characters 
+
+      // No duplicates
+
+      // wait for 500ms silence 
+
+    ).subscribe(console.log)
+    
+  }
+
   markets = this.searchForm.get([
     'advanced',
     'markets',
