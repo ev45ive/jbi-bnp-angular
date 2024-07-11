@@ -15,6 +15,7 @@ import {
   filter,
   map,
   mergeMap,
+  share,
   switchMap,
   takeUntil,
 } from 'rxjs';
@@ -41,6 +42,11 @@ export class AlbumSearchViewComponent {
 
   resultsChanges = this.queryChanges.pipe(
     switchMap((q) => this.api.searchAlbums(q).pipe(catchError(() => EMPTY))),
+    share()
+    // share({
+    //   connector: () => new Subject(),
+    //   resetOnRefCountZero: true,
+    // }),
   );
 
   searchAlbums(query = '') {

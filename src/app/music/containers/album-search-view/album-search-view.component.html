@@ -5,6 +5,10 @@
   <div>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4">
       <ng-container *ngIf="resultsChanges | async as results">
+        Found {{results.length}} results
+      </ng-container>
+      
+      <ng-container *ngIf="resultsChanges | async as results">
         @for (item of results; track item) {
           <app-album-card [album]="item" />
         }
