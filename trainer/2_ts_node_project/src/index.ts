@@ -3,13 +3,13 @@ import expressSession from 'express-session';
 
 const app = express();
 
-const secret = process.env['SECRT'];
+const secret = process.env['SECRET'];
 
-if (!secret) throw new Error('Missing ENV Secret'); /* else { secret } */
+if (!secret) throw new Error('Missing ENV Secret');
 
 app.use(
   expressSession({
-    secret,
+    secret: secret,
   }),
 );
 
