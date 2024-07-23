@@ -6,3 +6,11 @@ declare module 'react' {
 
   export declare function createElement(text: 'banana'): any;
 }
+
+declare global {
+  let someGlobal = `123`;
+
+  interface Window {
+    globalBanana: (text: 123) => void;
+  }
+}
