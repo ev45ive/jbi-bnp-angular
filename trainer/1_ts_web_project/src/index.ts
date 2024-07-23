@@ -1,2 +1,5 @@
+import {updateTitle} from './lib.js'
 
-console.log('Hello web!')
+console.log('Hello web!') 
+
+updateTitle('Hello TypeScript!')
