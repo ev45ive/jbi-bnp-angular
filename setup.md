@@ -27,3 +27,15 @@ npm -v
 9.5.1
 
 Vs Code // Chrome 
+
+
+
+
+https://stackblitz.com/github/ev45ive/jbi-bnp-angular
+
+https://github.com/ev45ive/jbi-bnp-angular/archive/refs/heads/master.zip
+
+
+npm run serve -o 
+
+http://localhost:4200/

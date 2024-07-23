@@ -19,6 +19,15 @@ code -v
 Help -> About -> version
 1.89.1
 
+# Extensions
+
+- Angular Language service
+- Angular Snippets - Mikel Morlund
+- Prettier
+- Pretty Typescript Errors 
+- Tailwind
+
+
 # Angular CLI
 
 npm install -g @angular/cli
