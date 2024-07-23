@@ -10,7 +10,7 @@ $('div').addClass('banana');
 
 console.log('pancakes', React);
 
-React.createElement('banana');
+// React.createElement('banana');
 React.pancakes;
 
 import { updateTitle } from './lib.js';
@@ -25,4 +25,4 @@ window.globalBanana(123);
 window.document
 window.parent
 
-someGlobal = '123';
+// someGlobal = '123';
