@@ -14,7 +14,7 @@ export const updateTitle = (text: string) => {
 
   // 'h1' is possibly 'null'
   if (h1Elem) {
-    h1Elem.innerHTML = 'Banana';
+    h1Elem.innerHTML = 'Hello from TypeScript';
   }
   //   h1Elem?.innerHTML = 'Anyying?'; // cannot assign to null/undefined
 };

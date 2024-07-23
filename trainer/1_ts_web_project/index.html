@@ -4,21 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "./node_modules/react/umd/react.development.js"
-        }
-      }
-    </script>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script type="module" src="./dist/index.js"></script>
+    
+    <!-- <script defer type="module" src="./dist/index.js"></script> -->
+ 
+    <!-- Vite bundler - notice the TS Extension! -->
+    <script defer type="module" src="./src/index.ts"></script>
   </head>
   <body>
     <h1>Welcome in HTML</h1>
 
-    <div class="server">
-      Live server extension
-    </div>
+    <div class="react"></div>
+
+    <div class="jquery"></div>
   </body>
 </html>

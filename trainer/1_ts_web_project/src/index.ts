@@ -1,28 +1,20 @@
 /// <reference path="./types.d.ts" />
 
-// import React, { Bananas } from 'react';
-// React.pancakes.toExponential()
-
-import * as React from 'react';
-// import 'jquery' // @types/jquery
-
-$('div').addClass('banana');
-
-console.log('pancakes', React);
-
-// React.createElement('banana');
-React.pancakes;
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import $ from 'jquery'; // @types/jquery
 import { updateTitle } from './lib.js';
 
 console.log('Hello web!');
 
 updateTitle('Hello TypeScript!');
 
-window.globalBanana = () => {};
-window.globalBanana(123);
+console.log('React: ', React);
 
-window.document
-window.parent
+ReactDOM.createRoot(document.querySelector('.react')!).render(
+  React.createElement('h3', { style: { color: 'red' } }, 'Hello from React'),
+);
 
-// someGlobal = '123';
+$('h1').css('color','hotpink')
+$('.jquery').append($('<h3>Hello from jQuery</h3>')).css('color','blue')
+
