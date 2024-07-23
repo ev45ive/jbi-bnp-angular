@@ -1,15 +1,15 @@
+import assert from 'assert';
 import express from 'express';
 import expressSession from 'express-session';
 
 const app = express();
 
-const secret = process.env['SECRET'];
-
-if (!secret) throw new Error('Missing ENV Secret');
+// if (!process.env['SECRET']) throw new Error('Missing ENV Secret');
+assert(process.env['SECRET'], 'Missing ENV Secret'); // type guard / assertion
 
 app.use(
   expressSession({
-    secret: secret,
+    secret: process.env['SECRET'],
   }),
 );
 
@@ -19,7 +19,10 @@ app.get('/', (req, res) => {
 
 console.log('Hello NodeJS', process.argv);
 
-app.listen(8080, '0.0.0.0', () => {
+const PORT = Number(process.env['PORT']) || 8080;
+const HOST = process.env['HOST'] || '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
   console.log(`Listening on http://0.0.0.0:8080/`);
 });
 
