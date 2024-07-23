@@ -1,5 +1,14 @@
-import {updateTitle} from './lib.js'
+/// <reference path="./types.d.ts" />
 
-console.log('Hello web!') 
+// import React, { Bananas } from 'react';
+// React.pancakes.toExponential()
 
-updateTitle('Hello TypeScript!')
+import * as React from 'react';
+
+console.log('pancakes', React);
+
+import { updateTitle } from './lib.js';
+
+console.log('Hello web!');
+
+updateTitle('Hello TypeScript!');

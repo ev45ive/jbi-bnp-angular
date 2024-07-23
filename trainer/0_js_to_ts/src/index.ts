@@ -1,5 +1,4 @@
 import { multiply, substract } from '../lib/lib';
-
 export {};
 
 const add = (a: number, b: number) => {

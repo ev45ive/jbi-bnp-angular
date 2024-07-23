@@ -12,3 +12,5 @@
 
 6. npm init -y   // -> Package.json
 7. npm i react jquery bootstrap
+
+ Try `npm i --save-dev @types/react` if it exists or add a new declaration (.d.ts) file containing `declare module 'react';`ts(7016)
