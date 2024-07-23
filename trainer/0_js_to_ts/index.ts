@@ -1,21 +1,11 @@
-// function add(a:string, b:string) {
-// function add(a: number, b: number) {
-// function add(a, b) {
-// function add(a: any, b: any) {// non strict
+export {};
 
-/**
- * Overloads
- */
-function add(a: string, b: string): string;
-function add(a: number, b: number): number;
-function add(a: number, b: number, c: number): number;
-
-function add(a: any, b: any, c?: number) {
+const add = (a: number, b: number) => {
   return a + b;
+};
+
+class MyClass{
+  property = 42344334
 }
 
-// add(null, undefined); // non Strict
-// add(null); // non Strict
-
-add(1, 2);
-add('Alice', 'has a cat');
+///$ tsc 0_js_to_ts/index.ts --target esnext --strict --watch
