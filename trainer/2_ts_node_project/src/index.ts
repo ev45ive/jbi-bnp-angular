@@ -19,24 +19,27 @@ const session = expressSession({
 
 app.use(session);
 
+// http://localhost:8080/playlists ? name = 123 & description = 123
 app.get('/playlists', (req, res) => {
-  console.log(req.query);
+  // console.log(req.query);
+  // let name = req.query['name'];
+  // let description = req.query['description'];
 
-  // http://localhost:8080/playlists ? name = 123 & description = 123
-  const name = req.query['name'];
-  // const description = req.query['description'];
+  const { name = '', description = '' } = req.query;
 
-  if (name) name;
-  if (typeof name === 'string') name;
-  if (name && !Array.isArray(name)) name;
-  const strName = String(name);
+  const str_name = typeof name === 'string' ? name : '';
+  const str_description = typeof description === 'string' ? description : '';
 
   res.send(
-    mockPlaylists.filter((p) => {
-      if (typeof name === 'string') return p.name.includes(name);
-                                    return true; // take all!
-    }),
+    mockPlaylists.filter(
+      (p) => p.name.includes(str_name) && p.description.includes(str_description),
+    ),
   );
+
+  // if (name) name;
+  // if (typeof name === 'string') name;
+  // if (name && !Array.isArray(name)) name;
+  // const strName = String(name);
 });
 
 app.get('/', (req, res) => {
