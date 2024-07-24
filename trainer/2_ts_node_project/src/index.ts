@@ -23,12 +23,13 @@ app.use((req, res, next) => {
 });
 
 app.get('/user', (req, res) => {
-
-  res.send(req.user) 
-})
+  res.send(req.user);
+});
 
 app.get('/playlists/:id', (req, res) => {
-  
+
+  req.session.views // From SessionData Merged Declaration!
+
   const found = mockPlaylists.find((p) => p.id == req.params['id']);
   if (!found) {
     return res.status(404).send({ message: 'Playlist not found' });
