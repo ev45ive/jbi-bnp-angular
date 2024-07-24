@@ -20,16 +20,23 @@ const session = expressSession({
 app.use(session);
 
 app.get('/playlists', (req, res) => {
+  console.log(req.query);
+
+  // http://localhost:8080/playlists ? name = 123 & description = 123
   const name = req.query['name'];
-  const description = req.query['description'];
-  
+  // const description = req.query['description'];
+
+  if (name) name;
+  if (typeof name === 'string') name;
+  if (name && !Array.isArray(name)) name;
+  const strName = String(name);
+
   res.send(
     mockPlaylists.filter((p) => {
-      p.name.includes(name);
-      p.name.includes(description);
+      if (typeof name === 'string') return p.name.includes(name);
+                                    return true; // take all!
     }),
   );
-
 });
 
 app.get('/', (req, res) => {
