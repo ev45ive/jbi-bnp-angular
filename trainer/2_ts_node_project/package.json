@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build":"tsc",
-    "build:watch":"tsc --watch",
-    "dev": "cross-env SECRET=devsecret node --enable-source-maps ./dist/index.js",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "cross-env SECRET=devsecret nodemon --enable-source-maps ./dist/index.js",
     "debug": "cross-env SECRET=devsecret node --inspect-brk --enable-source-maps ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +19,8 @@
     "@types/express-session": "^1.18.0",
     "@types/node": "^20.14.11",
     "cross-env": "^7.0.3",
-    "crossenv": "^0.0.2-security"
+    "crossenv": "^0.0.2-security",
+    "nodemon": "^3.1.4"
   },
   "dependencies": {
     "cors": "^2.8.5",

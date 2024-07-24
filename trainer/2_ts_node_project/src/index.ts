@@ -9,7 +9,7 @@ const app = express();
 assert(process.env['SECRET'], 'Missing ENV Secret'); // type guard / assertion
 
 const PORT = Number(process.env['PORT']) || 8080;
-const HOST = process.env['HOST'] || '0.0.0.0';
+const HOST = process.env['HOST'] || 'localhost';
 
 const session = expressSession({
   secret: process.env['SECRET'],
@@ -20,7 +20,16 @@ const session = expressSession({
 app.use(session);
 
 app.get('/playlists', (req, res) => {
-  res.send(mockPlaylists);
+  const name = req.query['name'];
+  const description = req.query['description'];
+  
+  res.send(
+    mockPlaylists.filter((p) => {
+      p.name.includes(name);
+      p.name.includes(description);
+    }),
+  );
+
 });
 
 app.get('/', (req, res) => {
@@ -30,7 +39,7 @@ app.get('/', (req, res) => {
 console.log('Hello NodeJS', process.argv.slice(2));
 
 app.listen(PORT, HOST, () => {
-  console.log(`Listening on http://0.0.0.0:8080/`);
+  console.log(`Listening on http://${HOST}:${PORT}/`);
 });
 
 // sourceMap + node --enable-source-maps
