@@ -15,6 +15,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CensorDirective } from './directives/censor.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ContenteditableDirective } from './directives/contenteditable.directive';
 
 // ng g shared -m playlists
 
@@ -39,8 +40,8 @@ export const SHARED_IMPORTS = [
 ];
 
 @NgModule({
-  declarations: [CensorDirective],
+  declarations: [CensorDirective, ContenteditableDirective],
   imports: [SHARED_IMPORTS],
-  exports: [SHARED_IMPORTS, CensorDirective],
+  exports: [SHARED_IMPORTS, CensorDirective, ContenteditableDirective],
 })
 export class SharedModule {}
