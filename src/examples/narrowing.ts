@@ -21,3 +21,26 @@ function assertExhaustiveness(uuid: never): never {
 
 const result1: string = normalizeUUID(123.0); /// '123'
 const result2: string = normalizeUUID('BaNaNaNa Batman!'); // 'bananana batman!'
+
+// ------
+
+interface Playlist {
+  id: string;
+  name: string;
+  tracks: Track[];
+}
+interface Track {
+  id: string;
+  name: string;
+  duration_ms: number;
+}
+interface Episode {
+  id: string;
+  name: string;
+  episode_no: number;
+}
+function showInfo(result: Playlist | Track | Episode) {
+  return `${result.name} - 10 tracks`;
+  return `${result.name} - 2.5 minutes`;
+  return `${result.name} - #5 episode`;
+}
