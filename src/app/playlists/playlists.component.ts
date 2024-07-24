@@ -9,9 +9,10 @@ import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
+import { Track } from '../core/model/Album';
 
-type DisplayModes = 'details' | 'editor' | 'creator'  
-// type DisplayModes = 'details' | 'editor' | 'creator' | string 
+type DisplayModes = 'details' | 'editor' | 'creator';
+// type DisplayModes = 'details' | 'editor' | 'creator' | string
 // type DisplayModes = 'details' | 'editor' | 'creator' | (string & {})
 
 @Component({
@@ -30,33 +31,48 @@ type DisplayModes = 'details' | 'editor' | 'creator'
   ],
 })
 export class PlaylistsComponent {
-  selectedId = '';
-  // selectedId: string = '';
-  // selectedId?: string; // string | undefined
-  // selectedId? = '';
-
-  // readonly SOME_CONSTANT = 'BANANA'; // "BANANA" literal type
-  // if(this.SOME_CONSTANT == 'APPLE'){}
-
-  // mode: string = 'details';
-  // mode: 'details' = 'details';
-  // mode = 'details' as const;
-  // mode: 'details' | 'editor' | 'creator' = 'creator';
-
   mode: DisplayModes = 'creator';
 
+  selectedId = '';
   playlistsData = mockPlaylists;
   selected = mockPlaylists[1];
 
   selectPlaylistById(id: string) {
-    const fromServer = 'de' + 'tails';
-    // if(this.mode === 'details') return
-
-    // if (fromServer == 'details' || fromServer === 'editor')
-    //   this.mode = fromServer;
-
     this.selectedId = id;
-    this.selected = this.playlistsData.find((p) => p.id == id)!;
+
+    // this.selected = this.playlistsData.find((p) => p.id == id) as any;
+    // this.selected = this.playlistsData.find((p) => p.id == id)!;
+    // this.selected = this.playlistsData.find((p) => p.id == id) as Playlist; // | undefined
+    // this.selected = {} as Playlist;
+
+    let found = this.playlistsData.find((p) => p.id == id) as
+      | Playlist
+      // | string // Extra Type
+      | undefined;
+
+    // found = 'spice latee!';
+
+    if (found && typeof found !== 'string')
+      this.selected = found; // Playlist
+    else if (found == undefined)
+      found; // undefined
+    
+    // Extra case
+    // else if(typeof found == 'string'){
+    //   found.toUpperCase() // Error
+    // }
+
+    else {
+      // const _never: never = found;
+      // found as never;      // Casting
+      
+      // Exhaustivness Check
+      found satisfies never;  // Checking!!! // Compile TS
+      throw new Error('Unexpected item found!'); // JS Runtime
+    }
+
+    return true;
+    const x = 'pancakes'; // Unreachable code detected.
   }
 
   showDetails() {
