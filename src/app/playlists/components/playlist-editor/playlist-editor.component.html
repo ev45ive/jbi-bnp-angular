@@ -1,72 +1,77 @@
-<form #formRef="ngForm" (ngSubmit)="submit()">
-  <pre>{{ playlist | json }}</pre>
-  <pre>{{ formRef.value | json }}</pre>
+@if (playlist) {
+  <form #formRef="ngForm" (ngSubmit)="submit()">
+    <pre>{{ playlist | json }}</pre>
+    <pre>{{ formRef.value | json }}</pre>
 
-  <div class="grid gap-5">
-    <div class="grid gap-2">
-      <mat-form-field class="flex-1">
-        <mat-label>Name</mat-label>
-        <input
-          type="text"
-          class="border border-solid border-gray-400"
-          [ngModel]="playlist.name"
-          matInput
-          name="name"
-          #localInputRef
-          #localModelRef="ngModel"
-          required
-          minlength="3"
-          appCensor="watman"
-        />
-        <mat-hint> {{ localModelRef.value?.length }} / 100 </mat-hint>
-        <mat-error>
-          @if (localModelRef.hasError("required")) {
-            Name is required
-          }
-          @if (localModelRef.getError("minlength"); as error) {
-            Mininum length is "{{ error.requiredLength }}"
-          }
-          @if (localModelRef.getError("censor"); as error) {
-            Cant contain "{{ error.badword }}"
-          }
-        </mat-error>
-      </mat-form-field>
-      <!-- <pre>{{ localModelRef.errors | json }}</pre> -->
-    </div>
-
-    <div class="grid gap-2">
-      <mat-checkbox [(ngModel)]="playlist.public" name="public">
-        Public</mat-checkbox
-      >
-    </div>
-
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea
-        matInput
-        [(ngModel)]="playlist.description"
-        name="description"
-        class="border border-solid border-gray-400"
-      ></textarea>
-    </mat-form-field>
-
-    <div class="grid gap-2">
-      <!-- 
-        S.O.L.I.D    SingleResp. Open/Close
-        Error: NG01203: No value accessor for form control name: 'description'. 
-        Find more at https://angular.dev/errors/NG01203
-       -->
-      <div contenteditable="true" [(ngModel)]="playlist.description" name="description">
-        Alice has a cat!
+    <div class="grid gap-5">
+      <div class="grid gap-2">
+        <mat-form-field class="flex-1">
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            class="border border-solid border-gray-400"
+            [ngModel]="playlist.name"
+            matInput
+            name="name"
+            #localInputRef
+            #localModelRef="ngModel"
+            required
+            minlength="3"
+            appCensor="watman"
+          />
+          <mat-hint> {{ localModelRef.value?.length }} / 100 </mat-hint>
+          <mat-error>
+            @if (localModelRef.hasError("required")) {
+              Name is required
+            }
+            @if (localModelRef.getError("minlength"); as error) {
+              Mininum length is "{{ error.requiredLength }}"
+            }
+            @if (localModelRef.getError("censor"); as error) {
+              Cant contain "{{ error.badword }}"
+            }
+          </mat-error>
+        </mat-form-field>
+        <!-- <pre>{{ localModelRef.errors | json }}</pre> -->
       </div>
-       
-    </div>
-  </div>
 
-  <div class="flex justify-between w-full mt-5">
-    <button mat-flat-button type="submit">Save</button>
-    <button mat-raised-button type="button" (click)="clickCancel()">
-      Cancel
-    </button>
-  </div>
-</form>
+      <div class="grid gap-2">
+        <mat-checkbox [(ngModel)]="playlist.public" name="public">
+          Public</mat-checkbox
+        >
+      </div>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="playlist.description"
+          name="description"
+          class="border border-solid border-gray-400"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="grid gap-2">
+        <!-- 
+          S.O.L.I.D    SingleResp. Open/Close
+          Error: NG01203: No value accessor for form control name: 'description'. 
+          Find more at https://angular.dev/errors/NG01203
+         -->
+        <div
+          contenteditable="true"
+          [(ngModel)]="playlist.description"
+          name="description"
+        >
+          Alice has a cat!
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between w-full mt-5">
+      <button mat-flat-button type="submit">Save</button>
+      <button mat-raised-button type="button" (click)="clickCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+}

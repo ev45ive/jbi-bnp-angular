@@ -5,6 +5,10 @@
       [selectedId]="selectedId"
       (selectedIdChange)="selectPlaylistById($event)"
     />
+
+    <button mat-fab (click)="mode = 'creator'">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
   <div>
     <ng-container [ngSwitch]="mode">
@@ -15,12 +19,18 @@
         (edit)="showEditor()"
       />
 
-      <!-- <app-playlist-editor
+      <app-playlist-editor
         *ngSwitchCase="'editor'"
         [playlist]="selected"
         (cancel)="showDetails()"
         (save)="savePlaylist($event)"
-      /> -->
+      />
+      
+      <app-playlist-editor
+        *ngSwitchCase="'creator'"
+        (cancel)="showDetails()"
+        (save)="savePlaylist($event)"
+      />
     </ng-container>
   </div>
 </div>
