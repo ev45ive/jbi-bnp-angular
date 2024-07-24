@@ -12,7 +12,8 @@ import {
 import { Track } from '../core/model/Album';
 
 type DisplayModes = 'details' | 'editor' | 'creator';
-// type DisplayModes = 'details' | 'editor' | 'creator' | string
+// type DisplayModes = 'details' | 'editor' | 'creator' | string 
+// type DisplayModes = 'details' | 'editor' | 'creator' | string | never | never
 // type DisplayModes = 'details' | 'editor' | 'creator' | (string & {})
 
 @Component({
@@ -34,45 +35,12 @@ export class PlaylistsComponent {
   mode: DisplayModes = 'creator';
 
   selectedId = '';
+  selected?: Playlist; // = mockPlaylists[1];
   playlistsData = mockPlaylists;
-  selected = mockPlaylists[1];
 
   selectPlaylistById(id: string) {
     this.selectedId = id;
-
-    // this.selected = this.playlistsData.find((p) => p.id == id) as any;
-    // this.selected = this.playlistsData.find((p) => p.id == id)!;
-    // this.selected = this.playlistsData.find((p) => p.id == id) as Playlist; // | undefined
-    // this.selected = {} as Playlist;
-
-    let found = this.playlistsData.find((p) => p.id == id) as
-      | Playlist
-      // | string // Extra Type
-      | undefined;
-
-    // found = 'spice latee!';
-
-    if (found && typeof found !== 'string')
-      this.selected = found; // Playlist
-    else if (found == undefined)
-      found; // undefined
-    
-    // Extra case
-    // else if(typeof found == 'string'){
-    //   found.toUpperCase() // Error
-    // }
-
-    else {
-      // const _never: never = found;
-      // found as never;      // Casting
-      
-      // Exhaustivness Check
-      found satisfies never;  // Checking!!! // Compile TS
-      throw new Error('Unexpected item found!'); // JS Runtime
-    }
-
-    return true;
-    const x = 'pancakes'; // Unreachable code detected.
+    this.selected = this.playlistsData.find((p) => p.id == id);
   }
 
   showDetails() {

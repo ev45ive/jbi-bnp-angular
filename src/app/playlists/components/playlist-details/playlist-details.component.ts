@@ -7,12 +7,12 @@ import { Playlist } from '../../../core/model/Playlist';
   styleUrl: './playlist-details.component.scss',
 })
 export class PlaylistDetailsComponent {
-
-  @Input({ required: true }) playlist!: Playlist;
+  // @Input({ required: true }) playlist!: Playlist;
+  @Input() playlist?: Playlist;
 
   @Output() edit = new EventEmitter<Playlist['id']>();
 
-  editClick(){
-    this.edit.emit(this.playlist.id)
+  editClick() {
+    if (this.playlist) this.edit.emit(this.playlist.id);
   }
 }

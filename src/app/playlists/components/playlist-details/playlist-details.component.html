@@ -1,54 +1,60 @@
-<!-- .grid.gap-5>div.grid.gap-2*3>strong{Name}+div{Playlist Name} -->
-
-<!-- {{ 'any expression '.toUpperCase() + 123 }} -->
-<!-- {{  isTrueOrFalse ? 'show this ' : 'else this'}} -->
-
-<div class="grid gap-5"
-    id="playlist_{{playlist.id}}"
+<ng-container *ngIf="playlist else noPlaylist">
+  <div
+    class="grid gap-5"
+    id="playlist_{{ playlist.id }}"
     [title]="playlist.name"
     [attr.data-playlist-id]="playlist.id"
->
-  <div class="grid gap-2">
-    <strong>Name</strong>
-    <div>{{ playlist.name }}</div>
-  </div>
-
-  <div class="grid gap-2">
-    <strong>Public</strong>
-    <!-- $0.style.color = 'red'  -->
-    <div [style.color]=" playlist.public ? 'red' : 'green' ">
-        {{ playlist.public ? "Yes" : "No" }}
+  >
+    <div class="grid gap-2">
+      <strong>Name</strong>
+      <div>{{ playlist.name }}</div>
     </div>
+
+    <div class="grid gap-2">
+      <strong>Public</strong>
+      <!-- $0.style.color = 'red'  -->
+      <div [style.color]="playlist.public ? 'red' : 'green'">
+        {{ playlist.public ? "Yes" : "No" }}
+      </div>
+    </div>
+
+    <div class="grid gap-2">
+      <strong>Description</strong>
+      <div [class.text-gray-500]="true">{{ playlist.description }}</div>
+    </div>
+
+    <div
+      [ngStyle]="{
+        color: playlist.public ? 'red' : 'green',
+      }"
+    ></div>
+
+    <!-- S.O.L.D -->
+    <!-- 
+d = new NgStyle(ElementRef<div> , renderer) 
+d.ngStyle = { ... }
+d.ngDoCheck()
+-->
+
+    <div
+      [ngClass]="{
+        isPublic: playlist.public,
+        isPrivate: !playlist.public,
+      }"
+    ></div>
+
+    <!-- 
+d = new NgClass(ElementRef<div> , renderer) 
+d.ngClass = {...}
+d.ngDoCheck()
+-->
   </div>
 
-  <div class="grid gap-2">
-    <strong>Description</strong>
-    <div [class.text-gray-500]="true">{{ playlist.description }}</div>
+  <div class="flex justify-between w-full">
+    <button mat-flat-button (click)="editClick()">Edit</button>
   </div>
+</ng-container>
 
-  <div [ngStyle]="{
-    color : playlist.public ? 'red' : 'green' 
-  }"></div>
-
-  <!-- S.O.L.D -->
-  <!-- 
-    d = new NgStyle(ElementRef<div> , renderer) 
-    d.ngStyle = { ... }
-    d.ngDoCheck()
-    -->
-
-  <div [ngClass]="{
-    isPublic: playlist.public,
-    isPrivate: !playlist.public,
-  }"></div>
-
-  <!-- 
-    d = new NgClass(ElementRef<div> , renderer) 
-    d.ngClass = {...}
-    d.ngDoCheck()
-   -->
-</div>
-
-<div class="flex justify-between w-full">
-  <button mat-flat-button (click)="editClick()">Edit</button>
-</div>
+<ng-template #noPlaylist>
+  No playlist selected
+</ng-template>
