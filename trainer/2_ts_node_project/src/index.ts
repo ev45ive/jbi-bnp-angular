@@ -1,10 +1,9 @@
 import assert from 'assert';
 import express from 'express';
 import expressSession from 'express-session';
+import { mockPlaylists } from './model/mockPlaylists';
 
 const app = express();
-
-debugger
 
 // if (!process.env['SECRET']) throw new Error('Missing ENV Secret');
 assert(process.env['SECRET'], 'Missing ENV Secret'); // type guard / assertion
@@ -12,11 +11,17 @@ assert(process.env['SECRET'], 'Missing ENV Secret'); // type guard / assertion
 const PORT = Number(process.env['PORT']) || 8080;
 const HOST = process.env['HOST'] || '0.0.0.0';
 
-app.use(
-  expressSession({
-    secret: process.env['SECRET'],
-  }),
-);
+const session = expressSession({
+  secret: process.env['SECRET'],
+  resave: false,
+  saveUninitialized: false,
+});
+
+app.use(session);
+
+app.get('/playlists', (req, res) => {
+  res.send(mockPlaylists);
+});
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello Node Express</h1>');
