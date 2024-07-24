@@ -6,7 +6,6 @@
     <div class="grid gap-2">
       <mat-form-field class="flex-1">
         <mat-label>Name</mat-label>
-
         <input
           type="text"
           class="border border-solid border-gray-400"
@@ -36,25 +35,20 @@
     </div>
 
     <div class="grid gap-2">
-      <label>
-        <input
-          type="checkbox"
-          [(ngModel)]="playlist.public"
-          name="public"
-          (click)="(0)"
-        />
-        Public</label
+      <mat-checkbox [(ngModel)]="playlist.public" name="public">
+        Public</mat-checkbox
       >
     </div>
 
-    <div class="grid gap-2">
-      <label>Description</label>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
       <textarea
+        matInput
         [(ngModel)]="playlist.description"
         name="description"
         class="border border-solid border-gray-400"
       ></textarea>
-    </div>
+    </mat-form-field>
   </div>
 
   <div class="flex justify-between w-full mt-5">
