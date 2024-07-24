@@ -174,3 +174,9 @@ http://www.jbinternational.co.uk/feedback/16697
  
 # TDD Testing
 https://ngneat.github.io/spectator/docs/testing-services
+
+# Cheat Sheet
+
+https://www.typescriptlang.org/cheatsheets/
+
+https://www.typescriptlang.org/docs/handbook/intro.html
