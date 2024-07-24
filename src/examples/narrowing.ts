@@ -38,9 +38,22 @@ interface Episode {
   id: string;
   name: string;
   episode_no: number;
+  duration_ms: number;
 }
-function showInfo(result: Playlist | Track | Episode) {
-  return `${result.name} - 10 tracks`;
-  return `${result.name} - 2.5 minutes`;
-  return `${result.name} - #5 episode`;
+const MS_IN_MINUTE = 1000 / 60;
+
+type ResultTypes = Playlist | Track | Episode;
+
+function showInfo(result: ResultTypes) {
+  if ('tracks' in result) {
+    return `${result.name} - ${result.tracks.length} tracks`;
+  }
+  // Narrowing Order matters
+  if ('episode_no' in result) {
+    return `${result.name} - episode #${result.episode_no} `;
+  }
+  if ('duration_ms' in result) {
+    return `${result.name} - ${result.duration_ms / MS_IN_MINUTE} min`;
+  }
+  assertExhaustiveness(result);
 }
