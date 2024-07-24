@@ -18,10 +18,18 @@ const session = expressSession({
 });
 
 app.use(session);
+app.use((req, res, next) => {
+  req.user = { name: 'Admin' };
+});
+
+app.get('/user', (req, res) => {
+
+  res.send(req.user) 
+})
 
 app.get('/playlists/:id', (req, res) => {
+  
   const found = mockPlaylists.find((p) => p.id == req.params['id']);
-
   if (!found) {
     return res.status(404).send({ message: 'Playlist not found' });
   }
