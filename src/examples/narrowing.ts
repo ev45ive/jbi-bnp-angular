@@ -1,4 +1,4 @@
-type AllowedUUIDTypes = number | string  // | { uuid: 123 };
+type AllowedUUIDTypes = number | string; // | { uuid: 123 };
 
 // Function lacks ending return statement and return type does not include 'undefined'
 
@@ -10,7 +10,12 @@ function normalizeUUID(uuid: AllowedUUIDTypes): string {
   if (typeof uuid === 'string') {
     return uuid.toLowerCase();
   }
-  uuid satisfies never;
+
+  assertExhaustiveness(uuid);
+  //   const _unreachableCode = 123; // Unreachable code detected.
+}
+
+function assertExhaustiveness(uuid: never): never {
   throw new Error('Not valid uuid' + uuid);
 }
 
