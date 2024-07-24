@@ -19,12 +19,18 @@ const session = expressSession({
 
 app.use(session);
 
+app.get('/playlists/:id', (req, res) => {
+  const found = mockPlaylists.find((p) => p.id == req.params['id']);
+
+  if (!found) {
+    return res.status(404).send({ message: 'Playlist not found' });
+  }
+
+  return res.send(found);
+});
+
 // http://localhost:8080/playlists ? name = 123 & description = 123
 app.get('/playlists', (req, res) => {
-  // console.log(req.query);
-  // let name = req.query['name'];
-  // let description = req.query['description'];
-
   const { name = '', description = '' } = req.query;
 
   const str_name = typeof name === 'string' ? name : '';
@@ -32,7 +38,8 @@ app.get('/playlists', (req, res) => {
 
   res.send(
     mockPlaylists.filter(
-      (p) => p.name.includes(str_name) && p.description.includes(str_description),
+      (p) =>
+        p.name.includes(str_name) && p.description.includes(str_description),
     ),
   );
 
