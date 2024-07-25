@@ -39,10 +39,36 @@ p; // Point
 let drawPoint: (v: Point) => Point;
 let drawVector: (v: Vector) => Vector;
 
-drawPoint = (p: Point) => ({} as Point);
-drawPoint = (p: Point) => ({} as Vector);
+drawPoint = (p: Point) => ({}) as Point;
+drawPoint = (p: Point) => ({}) as Vector;
 // drawPoint = (p: Vector) => {}; // Only point is given!
 
-drawVector = (p: Point) => ({} as Vector)
-drawVector = (p: Vector) => ({} as Vector);
+drawVector = (p: Point) => ({}) as Vector;
+drawVector = (p: Vector) => ({}) as Vector;
 
+interface ThingA {
+  A: 'a';
+}
+interface ThingB {
+  B: 'b';
+}
+const unionAB1: ThingA | ThingB = { A: 'a' };
+const unionAB2: ThingA | ThingB = { B: 'b' };
+const unionAB3: ThingA | ThingB = { A: 'a', B: 'b' };
+
+// const intersectAB1: ThingA & ThingB = { A: 'a'  }; // Errors
+// const intersectAB2: ThingA & ThingB = {   B: 'b' }; // Errors
+const intersectAB3: ThingA & ThingB = { A: 'a', B: 'b' };
+
+type OptionA = { type: 'A'; value: string };
+type OptionB = { type: 'B'; value: number; extra: 123 };
+
+const unionAB11: OptionA | OptionB = { type: 'A', value: '123' };
+const unionAB12: OptionA | OptionB = { type: 'B', value: 123, extra: 123 };
+
+const interOAOB: OptionA & OptionB = {} as never;
+
+type X = { q: string | undefined; x: 1 };
+type Y = { q: string; y: number };
+
+const intXY: X & Y = { q: '123', x: 1, y: 2 };
