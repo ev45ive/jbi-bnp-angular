@@ -55,16 +55,23 @@ const resul3: number | string = takeFirst([123, '123']);
 interface Collection<T> {
   add(x: T): void;
   get(): T;
+  // get(): T | undefined;
 }
 
 class Queue<T> implements Collection<T> {
-  items = [];
+  items: T[] = [];
   add(x: T): void {
-    this.items.push(x)
+    this.items.push(x);
   }
   get(): T {
-    return this.items.shift()
+    const item = this.items.shift();
+    if (!item) throw new Error('Cant remove last item because reasons!');
+    return item;
   }
 }
 
+
+interface IMappable {
+    // map(fn): ?[]
+}
 // class Stack implements Collection {}
