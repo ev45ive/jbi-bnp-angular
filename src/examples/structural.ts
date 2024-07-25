@@ -82,22 +82,53 @@ const intXY: X & Y = { q: '123', x: 1, y: 2 };
 
 // Freshness - Inline is Invariant (no more, no less)
 type Person = { name: string; age: number; friends?: Person[] };
-// const alice: Person = { name: 'Alice', age: 42, friends: [], likes:'bananas' }  // Error 
-const alice = { name: 'Alice', age: 42, friends: [], likes:'bananas' } as Person & {likes:any} // Fine
+// const alice: Person = { name: 'Alice', age: 42, friends: [], likes:'bananas' }  // Error
+const alice = {
+  name: 'Alice',
+  age: 42,
+  friends: [],
+  likes: 'bananas',
+} as Person & { likes: any }; // Fine
 
 function showPersonInfo(person: Person) {}
 
 showPersonInfo(alice); // Person & { likes:any }
-showPersonInfo({name:'Bob', age:32})
-// showPersonInfo({name:'Bob', age:32, friends:[], likes:'oranges'}) // Error 
+showPersonInfo({ name: 'Bob', age: 32 });
+// showPersonInfo({name:'Bob', age:32, friends:[], likes:'oranges'}) // Error
 // showPersonInfo({name:'Bob', age:32, friendss:[alice]}) // Error - A TYPO!
 
 // Object vs object vs {}
 
-function IOnlyTakeNonNullValues( value: ???){}
-function IOnlyTakeOnlyPrimitiveValues( value: ???){}
-function IOnlyTakeOnlyComplexValues( value: ???){}
+function onlyComplex(value: object) {
+  /* typeof value === 'object' */
+  value.toString()
+}
+// onlyComplex(null); // Error
+// onlyComplex(undefined); // Error
+// onlyComplex(123); // Error
+// onlyComplex('123'); // Error
+onlyComplex({}); // OK
+onlyComplex({ x: 1 }); // OK
+onlyComplex([]); // OK
+onlyComplex(function () {}); // OK
+onlyComplex(new Date()); // OK
 
+function onlyNonNull(value: {}) { value.toString() }
+// onlyNonNull(null)
+// onlyNonNull(undefined)
+onlyNonNull(123)
+onlyNonNull('123')
+onlyNonNull({})
+onlyNonNull({x:1})
+
+// function objectPrototype(value: Object & {x:1}) { value.x; value.toString() }
+function objectPrototype(value: Object ) {  value.toString() }
+// objectPrototype(null);
+// objectPrototype(undefined);
+objectPrototype(123);
+objectPrototype('123');
+objectPrototype({});
+objectPrototype({ x: 1 });
 
 // Branded
 
