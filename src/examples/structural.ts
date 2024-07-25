@@ -101,7 +101,7 @@ showPersonInfo({ name: 'Bob', age: 32 });
 
 function onlyComplex(value: object) {
   /* typeof value === 'object' */
-  value.toString()
+  value.toString();
 }
 // onlyComplex(null); // Error
 // onlyComplex(undefined); // Error
@@ -113,16 +113,20 @@ onlyComplex([]); // OK
 onlyComplex(function () {}); // OK
 onlyComplex(new Date()); // OK
 
-function onlyNonNull(value: {}) { value.toString() }
+function onlyNonNull(value: {}) {
+  value.toString();
+}
 // onlyNonNull(null)
 // onlyNonNull(undefined)
-onlyNonNull(123)
-onlyNonNull('123')
-onlyNonNull({})
-onlyNonNull({x:1})
+onlyNonNull(123);
+onlyNonNull('123');
+onlyNonNull({});
+onlyNonNull({ x: 1 });
 
 // function objectPrototype(value: Object & {x:1}) { value.x; value.toString() }
-function objectPrototype(value: Object ) {  value.toString() }
+function objectPrototype(value: Object) {
+  value.toString();
+}
 // objectPrototype(null);
 // objectPrototype(undefined);
 objectPrototype(123);
@@ -130,7 +134,34 @@ objectPrototype('123');
 objectPrototype({});
 objectPrototype({ x: 1 });
 
-// Branded
+// Branded Types -> Nominal Typing
+interface User {
+  id: string;
+}
+
+let playlistId = '123';
+let userId = '23452';
+let albumID = { id: 123, type: 'album' } as const;
+
+function getPlaylistById(id: string) {}
+getPlaylistById(userId);
+
+function getUserById(id: User['id']) {}
+getUserById(playlistId);
+
+declare const AlbumIdSymbol: unique symbol;
+type AlbumId = string & { [AlbumIdSymbol]: 'album' };
+function createAlbumId(id: string) {
+  return id as AlbumId;
+}
+const albumId = createAlbumId('123');
+
+function getAlbumById(id: AlbumId) {}
+// getAlbumById(playlistId);
+// getAlbumById('1231');
+getAlbumById(albumId);
+
+const showOnPage:string = albumId
 
 // Open ended union:
 type S = 'A' | 'B' | (string & {});
