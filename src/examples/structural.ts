@@ -94,6 +94,11 @@ showPersonInfo({name:'Bob', age:32})
 
 // Object vs object vs {}
 
+function IOnlyTakeNonNullValues( value: ???){}
+function IOnlyTakeOnlyPrimitiveValues( value: ???){}
+function IOnlyTakeOnlyComplexValues( value: ???){}
+
+
 // Branded
 
 // Open ended union:
