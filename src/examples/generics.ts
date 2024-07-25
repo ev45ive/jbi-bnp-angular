@@ -1,6 +1,3 @@
-const arr1 = [1, 2, 3]; // number[]
-const arr2 = ['alice', 'cat']; // Array<string>
-
 type Box = { value: any };
 
 const b: Box = { value: 'banana' };
@@ -10,7 +7,7 @@ function logAndReturn(value: string | number | number[]) {
   console.log(value);
   return value;
 }
-const value1 = logAndReturn(arr1);
+const value1 = logAndReturn([1, 2, 3]);
 const value = logAndReturn('awd');
 value; // any
 
@@ -34,4 +31,21 @@ const identity2 = <T>(x: T): T => x;
 
 type TypeSaveBox<T> = { value: T };
 const safeBox: TypeSaveBox<string> = { value: '123' };
-safeBox.value.toLowerCase()
+
+safeBox.value.toLowerCase();
+
+/// Generic Inference
+
+const arr1 = [1, 2, 3]; // number[]
+const arr2 = ['alice', 'cat']; // Array<string>
+const arr3 = [123, 'alice', { x: 1 }]; // Array<string|number|object>
+
+// function takeFirst<T>(arr: Array<T>): T{ return arr[0] }
+
+function takeFirst<T>(arr: T[]) {
+  return arr[0];
+}
+
+const resul1 = takeFirst<number>(arr1); // number
+const resul2 = takeFirst(['alice', 'cat']); // string
+const resul3: number | string = takeFirst([123, '123']);
