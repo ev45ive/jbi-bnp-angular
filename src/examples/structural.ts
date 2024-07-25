@@ -34,17 +34,24 @@ if ('length' in pv) {
 v; // Vector
 p; // Point
 
-// Contravariance - expect no more than is given
+// Contravariance - expect No more than is given
 
-let drawPoint: (v: Point) => Point;
+let drawPoint: (v: Point, color: string) => Point;
 let drawVector: (v: Vector) => Vector;
 
-drawPoint = (p: Point) => ({}) as Point;
+drawPoint = (p: Point, color) => ({}) as Point;
 drawPoint = (p: Point) => ({}) as Vector;
+drawPoint = () => ({}) as Vector;
 // drawPoint = (p: Vector) => {}; // Only point is given!
 
 drawVector = (p: Point) => ({}) as Vector;
 drawVector = (p: Vector) => ({}) as Vector;
+
+// this.elem.nativeElement.addEventListener('input', (e: Event) => {
+//     if (!(e instanceof InputEvent && e.target instanceof HTMLElement)) return;
+//     e.target.innerHTML; // InputEvent & {target: HTMLElement }
+
+// Unions vs Intersections
 
 interface ThingA {
   A: 'a';
@@ -72,3 +79,14 @@ type X = { q: string | undefined; x: 1 };
 type Y = { q: string; y: number };
 
 const intXY: X & Y = { q: '123', x: 1, y: 2 };
+
+// Freshness
+
+// Object vs object vs {}
+
+// Branded
+
+// Open ended union:
+type S = 'A' | 'B' | (string & {});
+const s1: S = 'B';
+const s2: S = 'Banana';

@@ -40,8 +40,8 @@ export class ContenteditableDirective implements ControlValueAccessor {
 
   registerOnChange(setValue: any): void {
     this.elem.nativeElement.addEventListener('input', (e: Event) => {
-      // if (!(e instanceof InputEvent && e.target instanceof HTMLElement)) return;
-      // e.target.innerHTML;
+      if (!(e instanceof InputEvent && e.target instanceof HTMLElement)) return;
+      e.target.innerHTML; // InputEvent & {target: HTMLElement }
       setValue(this.elem.nativeElement.innerHTML);
     });
   }
