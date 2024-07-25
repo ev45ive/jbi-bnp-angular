@@ -80,7 +80,17 @@ type Y = { q: string; y: number };
 
 const intXY: X & Y = { q: '123', x: 1, y: 2 };
 
-// Freshness
+// Freshness - Inline is Invariant (no more, no less)
+type Person = { name: string; age: number; friends?: Person[] };
+// const alice: Person = { name: 'Alice', age: 42, friends: [], likes:'bananas' }  // Error 
+const alice = { name: 'Alice', age: 42, friends: [], likes:'bananas' } as Person & {likes:any} // Fine
+
+function showPersonInfo(person: Person) {}
+
+showPersonInfo(alice); // Person & { likes:any }
+showPersonInfo({name:'Bob', age:32})
+// showPersonInfo({name:'Bob', age:32, friends:[], likes:'oranges'}) // Error 
+// showPersonInfo({name:'Bob', age:32, friendss:[alice]}) // Error - A TYPO!
 
 // Object vs object vs {}
 
