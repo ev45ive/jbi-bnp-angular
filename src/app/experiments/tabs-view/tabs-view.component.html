@@ -25,7 +25,24 @@
       </app-tabs-group-item>
     }
     <button mat-fab (click)="addTab()">
-        <mat-icon>add</mat-icon>
+      <mat-icon>add</mat-icon>
     </button>
   </app-tabs-group>
+
+  <h3>Single Tab</h3>
+  <app-tabs-group-item> Tab 1 </app-tabs-group-item>
+
+  <h3>Nested</h3>
+  <app-tabs-group-item>
+    Tab Parent
+
+    <app-tabs-group-item>
+      Tab Child 1
+      <app-tabs-group>
+        <app-tabs-group-item> Tab Grand Child </app-tabs-group-item>
+        <app-tabs-group-item> Tab Grand Child </app-tabs-group-item>
+      </app-tabs-group>
+    </app-tabs-group-item>
+
+  </app-tabs-group-item>
 </div>

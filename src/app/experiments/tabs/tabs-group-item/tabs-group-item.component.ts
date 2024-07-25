@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Host, Input, Optional } from '@angular/core';
 import { TabsGroupComponent } from '../tabs-group/tabs-group.component';
 
 @Component({
@@ -14,9 +14,12 @@ export class TabsGroupItemComponent {
 
   toggle() {
     this.isOpen = !this.isOpen;
-    this.group.toggleItem(this)
+    this.group?.toggleItem(this);
   }
 
-  constructor(protected group: TabsGroupComponent) {
-  }
+  constructor(
+    @Optional() // try to inject | null
+    @Host() // Only in parent component 
+    protected group: TabsGroupComponent | null,
+  ) {}
 }
