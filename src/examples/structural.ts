@@ -135,9 +135,9 @@ objectPrototype({});
 objectPrototype({ x: 1 });
 
 // Branded Types -> Nominal Typing
-interface User {
+type User = {
   id: string;
-}
+};
 
 let playlistId = '123';
 let userId = '23452';
@@ -161,9 +161,23 @@ function getAlbumById(id: AlbumId) {}
 // getAlbumById('1231');
 getAlbumById(albumId);
 
-const showOnPage:string = albumId
+const showOnPage: string = albumId;
 
 // Open ended union:
-type S = 'A' | 'B' | (string & {});
-const s1: S = 'B';
-const s2: S = 'Banana';
+type AB = 'A' | 'B';
+type S_wide = AB | string;
+type S = AB | (string & {});
+
+// const ab: AB = 'C'; // Error
+const s1: S_wide = 'Bababa';
+const s2: S = 'A';
+const s3: S = 'Alibaba';
+
+// Template literal types
+type protocols = 'http' | 'https';
+type domains = 'npb.com' | 'jbi.com';
+type startWith = `${protocols}://${domains}`;
+type URLS = `${startWith}/${string}`;
+
+const serverURL1: URLS = 'https://jbi.com/';
+const serverURL2: URLS = 'https://jbi.com/test/etst';
