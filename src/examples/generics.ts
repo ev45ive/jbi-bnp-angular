@@ -50,13 +50,21 @@ const resul1 = takeFirst<number>(arr1); // number
 const resul2 = takeFirst(['alice', 'cat']); // string
 const resul3: number | string = takeFirst([123, '123']);
 
-
 // Generic classes / interfaces
-interface Collection{
-    add(x):void
-    get():??
+
+interface Collection<T> {
+  add(x: T): void;
+  get(): T;
 }
 
-class Queue implements Collection{}
+class Queue<T> implements Collection<T> {
+  items = [];
+  add(x: T): void {
+    this.items.push(x)
+  }
+  get(): T {
+    return this.items.shift()
+  }
+}
 
-class Stack implements Collection{}
+// class Stack implements Collection {}
