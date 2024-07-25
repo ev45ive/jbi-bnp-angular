@@ -58,9 +58,31 @@ type SomePersonType = {
 
 /// Take some props
 // type Pick<T,K extends keyof any> = {
-    // [key in K] : T[K]
-    
+// [key in K] : T[K]
+
 type Pick<T, K extends keyof T> = {
   [key in K]: T[key];
 };
 type onlyNameAndID = Pick<SomePersonType, 'id' | 'name'>;
+
+// --- Conditional
+
+type ReplaceBanan<T, U> = T extends U ? 'no' | 'nope' : 'yes';
+
+                                              type DontWant = 'banana';
+                             type AllOptions = 'on' | 'off' | 'banana';
+type YesNo = ReplaceBanan<AllOptions, DontWant>; // "no" | "nope" | "yes"
+
+// Condition -- removing items:
+
+type Exclude<T, U> = T extends U ? never : T;
+type Extract<T, U> = T extends U ? T : never;
+
+type AllOptions1 = 'on' | 'off' | 'banana';
+type DontWant2 = 'banana';
+
+type NoBananas = Exclude<AllOptions, DontWant>; // "no" | "nope" | "yes"
+type OnlyBananas = Extract<AllOptions, DontWant>; // "no" | "nope" | "yes"
+
+
+
