@@ -1,3 +1,5 @@
+export {}
+
 type INdexedType = {
   [k in number]: string;
 };
@@ -41,3 +43,12 @@ type PartialPerson = {
 };
 // const bananaPerson: PartialPerson = { name: 'banana' };
 const bananaPerson: PartialPerson = { name: 'Not a banana', age: 123 };
+
+type Partial<T> = {
+  [K in keyof T]?: T[K];
+};
+
+type OPtionalPRops = Partial<Person>// Make all props optional  
+
+
+/// 
