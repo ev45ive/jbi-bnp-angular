@@ -18,10 +18,14 @@
   </app-tabs-group>
 
   <app-tabs-group>
-    @for (item of [1, 2, 3, 4]; track $index) {
+    <h3>Dynamic Tabs</h3>
+    @for (item of dynamicTabs; track $index) {
       <app-tabs-group-item title="Tab {{ item }}">
         Tab {{ item }}
       </app-tabs-group-item>
     }
+    <button mat-fab (click)="addTab()">
+        <mat-icon>add</mat-icon>
+    </button>
   </app-tabs-group>
 </div>
