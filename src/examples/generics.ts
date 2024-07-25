@@ -80,13 +80,6 @@ function combineSameTypeArrays<T>(arr1: T[], arr2: T[]) {
 }
 combineSameTypeArrays([1], [1]);
 
-// function combineDifferentArrays<T1,T2>(arr1: T1[], arr2: T2[]) {
-//   return arr1.concat(arr2);
-// }
-// combineDifferentArrays([123], ['123']);
-
-// No need for GEnerics - different inputs, same output
-
 const admin = { name: 'Admin' };
 const person = { name: 'Alice', age: 123 };
 const bot = { name: 'Helpful CHatb0t', model: 'gpt99' };
@@ -136,3 +129,20 @@ const getObjectProperty5 = <T extends object, K extends keyof T>(
 // getObjectProperty5<Person2, 'age' | 'name'>(person, 'age'); // age
 getObjectProperty5(person, 'age'); // age
 // getObjectProperty5('bababa', 0);  // 'banana'[0] // Errror because not object
+
+// COmbine arrays
+
+type PName = Person2['name'];
+type SomeArray = Array<string>;
+type Item1 = SomeArray[0];
+type Item2 = SomeArray[number];
+
+function combineDifferentArrays<T1 extends any[], T2 extends any[]>(
+  arr1: T1,
+  arr2: T2,
+): T1[number] | T2[number] {
+  return arr1.concat(arr2);
+}
+combineDifferentArrays([123], ['123']); // string | number
+
+// No need for GEnerics - different inputs, same output
