@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TabsGroupComponent } from '../tabs-group/tabs-group.component';
 
 @Component({
   selector: 'app-tabs-group-item',
@@ -13,6 +14,9 @@ export class TabsGroupItemComponent {
 
   toggle() {
     this.isOpen = !this.isOpen;
+    this.group.toggleItem(this)
   }
 
+  constructor(protected group: TabsGroupComponent) {
+  }
 }

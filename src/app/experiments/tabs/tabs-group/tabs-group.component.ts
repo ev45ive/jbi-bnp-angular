@@ -9,6 +9,14 @@ import { TabsGroupItemComponent } from '../tabs-group-item/tabs-group-item.compo
   styleUrl: './tabs-group.component.scss',
 })
 export class TabsGroupComponent {
+  
+  toggleItem(tabItem: TabsGroupItemComponent) {
+    this.children?.forEach((tab) => {
+      if (tabItem !== tab) {
+        tab.isOpen = false;
+      }
+    });
+  }
 
   @ContentChildren(TabsGroupItemComponent)
   children?: QueryList<TabsGroupItemComponent>;
