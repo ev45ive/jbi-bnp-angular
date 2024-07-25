@@ -91,6 +91,48 @@ const admin = { name: 'Admin' };
 const person = { name: 'Alice', age: 123 };
 const bot = { name: 'Helpful CHatb0t', model: 'gpt99' };
 
-function getUserInfo(person: { name: string }) {
+function getUserInfo(person: /* extends */ { name: string }) {
   return person.name;
 }
+
+/// Constraints
+
+// function getObjectProperty(obj: ??, key: ??) { return obj[key] }
+
+// Step1:
+const getObjectProperty1 = (obj: { name: string }, key: 'name') => obj[key];
+getObjectProperty1(admin, 'name');
+
+// Step 2
+type Person2 = typeof person; // Extract type from value
+
+const getObjectProperty2 = (obj: Person2, key: 'age' | 'name') => obj[key];
+getObjectProperty2({ name: 'Alice', age: 123 }, 'name');
+getObjectProperty2({ name: 'Alice', age: 123 }, 'age');
+
+// step 3
+type PersonKeys1 = 'name' | 'age';
+type PersonKeys2 = keyof Person;
+const keys: keyof Person = 'friends';
+
+const getObjectProperty3 = (obj: Person2, key: keyof Person2) => obj[key];
+
+// Step 4 - no constraing between usages - obj vs key
+const getObjectProperty4 = <T>(obj: T, key: keyof T) => obj[key];
+// const getObjectProperty5 = <T>(obj: T, key: 'name'|'age') => obj['name'|'age'];
+
+getObjectProperty4(admin, 'name');
+getObjectProperty4(person, 'age'); // string | number
+getObjectProperty4(bot, 'model');
+
+// step 5  - Constraints
+// const getObjectProperty5 = <T, K extends keyof T>(obj: T, key: K) => obj[key];
+
+const getObjectProperty5 = <T extends object, K extends keyof T>(
+  obj: T,
+  key: K,
+): T[K] => obj[key];
+
+// getObjectProperty5<Person2, 'age' | 'name'>(person, 'age'); // age
+getObjectProperty5(person, 'age'); // age
+// getObjectProperty5('bababa', 0);  // 'banana'[0] // Errror because not object
