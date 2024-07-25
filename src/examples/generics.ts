@@ -70,8 +70,27 @@ class Queue<T> implements Collection<T> {
   }
 }
 
-
 interface IMappable {
-    // map(fn): ?[]
+  // map(fn): ?[]
 }
 // class Stack implements Collection {}
+
+function combineSameTypeArrays<T>(arr1: T[], arr2: T[]) {
+  return arr1.concat(arr2);
+}
+combineSameTypeArrays([1], [1]);
+
+// function combineDifferentArrays<T1,T2>(arr1: T1[], arr2: T2[]) {
+//   return arr1.concat(arr2);
+// }
+// combineDifferentArrays([123], ['123']);
+
+// No need for GEnerics - different inputs, same output
+
+const admin = { name: 'Admin' };
+const person = { name: 'Alice', age: 123 };
+const bot = { name: 'Helpful CHatb0t', model: 'gpt99' };
+
+function getUserInfo(person: { name: string }) {
+  return person.name;
+}
