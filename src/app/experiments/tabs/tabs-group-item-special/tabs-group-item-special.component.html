@@ -1,0 +1,9 @@
+<div class="grid">
+  <strong (click)="toggle()">
+    ToggleME!
+  </strong>
+
+  @if (isOpen) {
+    <ng-content></ng-content>
+  }
+</div>
