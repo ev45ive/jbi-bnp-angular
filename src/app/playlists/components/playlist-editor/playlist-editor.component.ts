@@ -48,8 +48,10 @@ export class PlaylistEditorComponent {
   @ViewChild('localModelRef', { read: NgModel })
   localModelRef?: NgModel;
 
-  @ViewChild('formRef', { read: NgForm })
+  @ViewChild(NgForm, { read: NgForm })
   formRef?: NgForm;
+
+  constructor(private parent:PlaylistsComponent){}
 
   ngAfterViewInit(): void {}
 

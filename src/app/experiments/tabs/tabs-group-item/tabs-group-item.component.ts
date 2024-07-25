@@ -9,9 +9,10 @@ import { Component, Input } from '@angular/core';
 })
 export class TabsGroupItemComponent {
   @Input() title = '';
-  
+  @Input() isOpen = false;
+
   toggle() {
     this.isOpen = !this.isOpen;
   }
-  isOpen = false;
+
 }
