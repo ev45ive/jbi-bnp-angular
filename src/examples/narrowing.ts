@@ -49,7 +49,7 @@ const MS_IN_MINUTE = 1000 / 60;
 
 type ResultTypes = Playlist | Track | Episode;
 
-function showInfo2(result: ResultTypes) {
+function showInfo2(result: ResultTypes): string {
   switch (result.type) {
     case 'playlist': return `${result.name} - ${result.tracks.length} tracks`;
     case 'episode': return `${result.name} - episode #${result.episode_no} `;

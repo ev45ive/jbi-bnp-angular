@@ -180,3 +180,12 @@ https://ngneat.github.io/spectator/docs/testing-services
 https://www.typescriptlang.org/cheatsheets/
 
 https://www.typescriptlang.org/docs/handbook/intro.html
+
+# Experiments feature
+
+ng g c experiments/tabs-view 
+
+CREATE src/app/experiments/tabs-view/tabs-view.component.html (25 bytes)
+CREATE src/app/experiments/tabs-view/tabs-view.component.spec.ts (630 bytes)
+CREATE src/app/experiments/tabs-view/tabs-view.component.ts (258 bytes)
+CREATE src/app/experiments/tabs-view/tabs-view.component.scss (0 bytes)
