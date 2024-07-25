@@ -49,3 +49,14 @@ function takeFirst<T>(arr: T[]) {
 const resul1 = takeFirst<number>(arr1); // number
 const resul2 = takeFirst(['alice', 'cat']); // string
 const resul3: number | string = takeFirst([123, '123']);
+
+
+// Generic classes / interfaces
+interface Collection{
+    add(x):void
+    get():??
+}
+
+class Queue implements Collection{}
+
+class Stack implements Collection{}
