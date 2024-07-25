@@ -1,0 +1,11 @@
+<div class="grid border border-solid border-gray-700">
+  <div class="min-h-6 p-2 bg-gray-400" (click)="toggle()">
+    {{title}}
+  </div>
+
+  @if (isOpen) {
+    <div class="p-3">
+      <ng-content></ng-content>
+    </div>
+  }
+</div>

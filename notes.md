@@ -189,3 +189,8 @@ CREATE src/app/experiments/tabs-view/tabs-view.component.html (25 bytes)
 CREATE src/app/experiments/tabs-view/tabs-view.component.spec.ts (630 bytes)
 CREATE src/app/experiments/tabs-view/tabs-view.component.ts (258 bytes)
 CREATE src/app/experiments/tabs-view/tabs-view.component.scss (0 bytes)
+
+
+ng g c experiments/tabs/tabs-group
+ng g c experiments/tabs/tabs-group-item
+
