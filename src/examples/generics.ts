@@ -25,4 +25,13 @@ res = parseJSON2<{ x: 1 }>('{x:1}');
 
 res.x;
 
-// Useful gernerics
+// Useful gernerics - used at least 2x - in matches out
+
+function identity1<T>(x: T): T {
+  return x;
+}
+const identity2 = <T>(x: T): T => x;
+
+type TypeSaveBox<T> = { value: T };
+const safeBox: TypeSaveBox<string> = { value: '123' };
+safeBox.value.toLowerCase()
