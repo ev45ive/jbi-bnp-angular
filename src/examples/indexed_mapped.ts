@@ -60,17 +60,17 @@ type SomePersonType = {
 // type Pick<T,K extends keyof any> = {
 // [key in K] : T[K]
 
-type Pick<T, K extends keyof T> = {
-  [key in K]: T[key];
-};
+// type Pick<T, K extends keyof T> = {
+//   [key in K]: T[key];
+// };
 type onlyNameAndID = Pick<SomePersonType, 'id' | 'name'>;
 
 // --- Conditional
 
 type ReplaceBanan<T, U> = T extends U ? 'no' | 'nope' : 'yes';
 
-                                              type DontWant = 'banana';
-                             type AllOptions = 'on' | 'off' | 'banana';
+type DontWant = 'banana';
+type AllOptions = 'on' | 'off' | 'banana';
 type YesNo = ReplaceBanan<AllOptions, DontWant>; // "no" | "nope" | "yes"
 
 // Condition -- removing items:
@@ -84,5 +84,20 @@ type DontWant2 = 'banana';
 type NoBananas = Exclude<AllOptions, DontWant>; // "no" | "nope" | "yes"
 type OnlyBananas = Extract<AllOptions, DontWant>; // "no" | "nope" | "yes"
 
+type Omit<T, K> = Pick<T, Exclude<keyof T, keyof K>>;
 
+type Mix = Omit<{ name: string; age: number }, { name: number }>;
 
+// Inferred
+declare function baana(arg: 'apple', p2: 123): 'orange';
+
+type FType = typeof baana;
+
+type Parameters<T> = T extends (...arg: infer P) => any ? P : never;
+type ReturnType<T> = T extends (...arg: any) => infer R ? R : never;
+
+type FParam = Parameters<typeof baana>;
+type FRet = ReturnType<typeof baana>;
+
+// (arg: "apple", p2: 123) => FRet
+type myDynamicFunction = (...params: FParam) => FRet;
