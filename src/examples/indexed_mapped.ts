@@ -1,4 +1,4 @@
-export {}
+export {};
 
 type INdexedType = {
   [k in number]: string;
@@ -48,7 +48,19 @@ type Partial<T> = {
   [K in keyof T]?: T[K];
 };
 
-type OPtionalPRops = Partial<Person>// Make all props optional  
+type OPtionalPRops = Partial<Person>; // Make all props optional
 
+type SomePersonType = {
+  id: number;
+  name: string;
+  ppl: Person[];
+};
 
-/// 
+/// Take some props
+// type Pick<T,K extends keyof any> = {
+    // [key in K] : T[K]
+    
+type Pick<T, K extends keyof T> = {
+  [key in K]: T[key];
+};
+type onlyNameAndID = Pick<SomePersonType, 'id' | 'name'>;
